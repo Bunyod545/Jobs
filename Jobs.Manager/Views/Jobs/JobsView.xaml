@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Jobs.Manager.Views.Jobs.JobsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Jobs.Manager.Views.Jobs"
+             xmlns:self="clr-namespace:Jobs.Common.Database.Tables;assembly=Jobs.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+
+    <UserControl.Resources>
+        <ContextMenu x:Key="FolderContext"  StaysOpen="true">
+            <MenuItem Header="Add..." />
+            <MenuItem Header="Rename"/>
+            <MenuItem Header="Remove"/>
+            <Separator/>
+            <MenuItem Header="Copy"/>
+            <MenuItem Header="Cut"/>
+            <MenuItem Header="Paste"/>
+            <MenuItem Header="Move"/>
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid HorizontalAlignment="Left" Width="300">
+            <Label Content="Job groups" FontSize="16" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
+            <TreeView Margin="0,30,0,0" FontSize="16" ContextMenu="{StaticResource FolderContext}" ItemsSource="{Binding JobGroups}">
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type self:JobGroup}" ItemsSource="{Binding ChildGroups}">
+                        <TextBlock Text="{Binding Name}"/>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+        <Grid Margin="300,0,0,0">
+            <Label Content="Jobs" FontSize="16" Margin="40,0,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
+            <ScrollViewer>
+                <WrapPanel Margin="30,30,0,0" Orientation="Horizontal">
+                    <WrapPanel.Resources>
+                        <Style TargetType="{x:Type local:JobView}">
+                            <Setter Property="Margin" Value="0,0" />
+                            <Setter Property="Padding" Value="10,10" />
+                        </Style>
+                    </WrapPanel.Resources>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                    <local:JobView></local:JobView>
+                </WrapPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

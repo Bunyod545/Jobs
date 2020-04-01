@@ -16,7 +16,7 @@ namespace Jobs.Common.Database
         /// <summary>
         /// 
         /// </summary>
-        public ILiteCollection<JobGroup> Jobs { get; set; }
+        public ILiteCollection<JobGroup> JobGroups { get; set; }
 
         /// <summary>
         /// 
@@ -29,7 +29,7 @@ namespace Jobs.Common.Database
         public JobsDatabase()
         {
             Database = new LiteDatabase(DatabaseName);
-            Database.GetCollection<JobGroup>();
+            JobGroups = Database.GetCollection<JobGroup>();
         }
     }
 }

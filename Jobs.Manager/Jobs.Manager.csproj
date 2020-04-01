@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiteDB, Version=5.0.5.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.5.0.5\lib\net45\LiteDB.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=1.53.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.1.53.0\lib\netstandard10\PropertyChanged.dll</HintPath>
       <Private>False</Private>
@@ -47,6 +50,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -131,22 +135,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Jobs.Common\Jobs.Common.csproj">
-      <Project>{c55d8aab-39d5-4942-b670-34ea96f8c1b6}</Project>
+      <Project>{e44c2029-d4a7-4d3d-9c31-291addfd7a72}</Project>
       <Name>Jobs.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Jobs.Tasks.Common\Jobs.Tasks.Common.csproj">
-      <Project>{b7229a62-f4fe-4ed0-b6cb-aebe6af7a919}</Project>
+      <Project>{89026aba-3521-4b01-b243-46bce5904d28}</Project>
       <Name>Jobs.Tasks.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tasks\DotnetPublish.Tasks\DotnetPublish.Tasks.csproj">
-      <Project>{d0643174-1837-4430-b9b6-d3d39ff29874}</Project>
+      <Project>{84564a85-f8a4-46f1-8f32-c955b1ec8d7c}</Project>
       <Name>DotnetPublish.Tasks</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tasks\SystemctlService.Tasks\SystemctlService.Tasks.csproj">
-      <Project>{324be853-283d-4394-b750-78adb1f0c0cf}</Project>
+      <Project>{0cda19a4-1687-4dc0-8076-fdc67786f14b}</Project>
       <Name>SystemctlService.Tasks</Name>
     </ProjectReference>
   </ItemGroup>

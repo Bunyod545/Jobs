@@ -23,8 +23,8 @@
                 <RowDefinition Height="30"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{Binding NameText}" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="3"></TextBlock>
-            <TextBlock Grid.Row="1" TextWrapping="WrapWithOverflow" Margin="5" Text="{Binding DescriptionText}">
+            <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="3"></TextBlock>
+            <TextBlock Grid.Row="1" TextWrapping="WrapWithOverflow" Margin="5" Text="{Binding Description}">
             </TextBlock>
         </Grid>
     </Border>

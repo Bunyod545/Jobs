@@ -149,6 +149,7 @@
     <ProjectReference Include="..\Tasks\DotnetPublish.Tasks\DotnetPublish.Tasks.csproj">
       <Project>{84564a85-f8a4-46f1-8f32-c955b1ec8d7c}</Project>
       <Name>DotnetPublish.Tasks</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tasks\Sftp.Tasks\Sftp.Tasks.csproj">
       <Project>{844b7220-aad3-413a-88a8-239889c99837}</Project>
@@ -158,6 +159,7 @@
     <ProjectReference Include="..\Tasks\SystemctlService.Tasks\SystemctlService.Tasks.csproj">
       <Project>{0cda19a4-1687-4dc0-8076-fdc67786f14b}</Project>
       <Name>SystemctlService.Tasks</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

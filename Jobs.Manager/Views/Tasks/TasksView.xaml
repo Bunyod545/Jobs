@@ -6,9 +6,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Width="150" x:Name="TasksListBox">
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="150" Orientation="Vertical">
+            <CheckBox Content="Tasks" Margin="10,10,0,0"/>
+            <ListBox HorizontalAlignment="Left" x:Name="TasksListBox">
 
-        </ListBox>
+            </ListBox>
+        </StackPanel>
+        
         <RichTextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Background="Black" Foreground="White" VerticalAlignment="Stretch" Margin="150,0,0,60" x:Name="RichTextBox" >
             <FlowDocument></FlowDocument>
         </RichTextBox>

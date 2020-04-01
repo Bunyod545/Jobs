@@ -13,11 +13,6 @@
             <MenuItem Header="Add..." />
             <MenuItem Header="Rename"/>
             <MenuItem Header="Remove"/>
-            <Separator/>
-            <MenuItem Header="Copy"/>
-            <MenuItem Header="Cut"/>
-            <MenuItem Header="Paste"/>
-            <MenuItem Header="Move"/>
         </ContextMenu>
     </UserControl.Resources>
 
@@ -57,7 +52,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <local:JobView TitleText="{Binding NameText}" DescriptonText="{Binding DescriptionText}"></local:JobView>
+                            <local:JobView DataContext="{Binding}"></local:JobView>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

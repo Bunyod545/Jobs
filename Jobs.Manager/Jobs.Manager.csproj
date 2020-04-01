@@ -74,6 +74,7 @@
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Jobs\JobsViewModel.cs" />
+    <Compile Include="Views\Jobs\JobViewModel.cs" />
     <Compile Include="Views\Tasks\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>

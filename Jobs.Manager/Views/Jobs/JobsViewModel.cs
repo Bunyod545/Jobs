@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Jobs.Common.Database.Tables;
 
@@ -10,10 +9,6 @@ namespace Jobs.Manager.Views.Tasks
     /// </summary>
     public class JobsViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// 
@@ -29,5 +24,10 @@ namespace Jobs.Manager.Views.Tasks
         /// 
         /// </summary>
         public ObservableCollection<Job> Jobs { get; set; } = new ObservableCollection<Job>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

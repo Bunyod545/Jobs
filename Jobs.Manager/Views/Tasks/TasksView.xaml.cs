@@ -39,7 +39,7 @@ namespace Jobs.Manager.Views.Tasks
             task.Name = "DotnetPublish";
             task.TaskClassName = "PublishTask";
             task.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
-            
+
             task.TaskData = new JsonObject();
             task.TaskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
             task.TaskData.Add("Configuration", "Release");
@@ -63,7 +63,7 @@ namespace Jobs.Manager.Views.Tasks
             jobExecuter.Initialize();
             ExecuteButton.IsEnabled = false;
 
-            ThreadTask.Run(jobExecuter.Execute).ContinueWith(OnExecuteFinished);
+            ThreadTask.Run(() => jobExecuter.Execute()).ContinueWith(OnExecuteFinished);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Jobs.Manager.Views.Tasks
         /// <param name="color"></param>
         public void HighlightWordInRichTextBox(string word, Color color)
         {
-            if(word == null)
+            if (word == null)
                 return;
 
             Dispatcher.Invoke(() =>

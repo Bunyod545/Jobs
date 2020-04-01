@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Jobs.Common.Database.Tables
 {
@@ -33,8 +32,6 @@ namespace Jobs.Common.Database.Tables
         /// </summary>
         public JobGroup()
         {
-            Jobs = new List<Job>();
-            ChildGroups = new List<JobGroup>();
         }
     }
 }

@@ -34,8 +34,9 @@ namespace Jobs.Manager.Views.Tasks
         {
             InitializeComponent();
 
-            var db = new JobsDatabase();
-            var group = db.JobGroups.Find(f=>f.Id != null).ToList();
+            //var groups = JobsDatabase.JobGroups.Include(i => i.Jobs).FindAll().ToList();
+            //var jobs = JobsDatabase.Jobs.FindAll().ToList();
+            //var tasks = JobsDatabase.Tasks.FindAll().ToList();
             //    .ToList().FirstOrDefault();
             //Job = group.Jobs.FirstOrDefault();
             //var task = Job.Tasks.FirstOrDefault();

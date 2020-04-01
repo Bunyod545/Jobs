@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Jobs.Common.Database.Tables;
 using Jobs.Manager.Views.Tasks;
 
@@ -27,6 +28,7 @@ namespace Jobs.Manager.Views.Jobs
 
             var jobGroup1Child1 = new JobGroup();
             jobGroup1Child1.Name = "Child1";
+            jobGroup1.ChildGroups = new List<JobGroup>();
             jobGroup1.ChildGroups.Add(jobGroup1Child1);
 
             var jobGroup1Child2 = new JobGroup();

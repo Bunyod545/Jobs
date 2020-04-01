@@ -80,7 +80,7 @@ namespace Jobs.Common.Logics.Tasks
             if (task == null)
                 return false;
 
-            TaskArgumentInitializer.SetArguments(task, Task.TaskData);
+            TaskArgumentInitializer.SetArguments(task, Task.GetTaskData());
             return task.Execute();
         }
     }

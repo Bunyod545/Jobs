@@ -14,5 +14,14 @@ namespace SystemctlService.Tasks
         public SystemctlStatusTask(ITaskLogService log) : base(log)
         {
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string GetCommandName()
+        {
+            return "status";
+        }
     }
 }

@@ -1,38 +1,33 @@
-﻿using System.Collections.Generic;
-
-namespace Jobs.Common.Database.Tables
+﻿namespace Sftp.Tasks
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Job
+    public partial class SftpCopyTask
     {
         /// <summary>
         /// 
         /// </summary>
-        public int Id { get; set; }
+        public string SftpHost { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get; set; }
+        public string SftpLogin { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
+        public string SftpPassword { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<Task> Tasks { get; set; }
+        public string FromPath { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public Job()
-        {
-            
-        }
+        public string ToPath { get; set; }
     }
 }

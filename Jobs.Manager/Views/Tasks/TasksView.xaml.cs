@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Threading;
+using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Manager.Logics.Services.Log;
@@ -32,23 +34,14 @@ namespace Jobs.Manager.Views.Tasks
         {
             InitializeComponent();
 
-            Job = new Job();
-            Job.NameText = "DotnetPublish";
+            var db = new JobsDatabase();
+            var group = db.JobGroups.Find(f=>f.Id != null).ToList();
+            //    .ToList().FirstOrDefault();
+            //Job = group.Jobs.FirstOrDefault();
+            //var task = Job.Tasks.FirstOrDefault();
 
-            var task = new Task();
-            task.Name = "DotnetPublish";
-            task.TaskClassName = "PublishTask";
-            task.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
-
-            task.TaskData = new JsonObject();
-            task.TaskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
-            task.TaskData.Add("Configuration", "Release");
-            task.TaskData.Add("Framework", "netcoreapp2.2");
-            task.TaskData.Add("Runtime", "linux-x64");
-
-
-            TasksListBox.Items.Add(task);
-            Job.Tasks.Add(task);
+            //TasksListBox.Items.Add(task);
+            //Job.Tasks.Add(task);
         }
 
         /// <summary>

@@ -40,8 +40,8 @@ namespace Jobs.Manager.Views.Jobs
             ViewModel.JobGroups.Add(jobGroup2);
 
             var job = new Job();
-            job.NameText = "Merchant update";
-            job.DescriptionText = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test";
+            job.Name = "Merchant update";
+            job.Description = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test";
 
             ViewModel.Jobs.Add(job);
             ViewModel.Jobs.Add(job);

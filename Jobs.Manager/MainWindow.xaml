@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000" Loaded="MainWindow_OnLoaded">
     <Grid>
-        <jobs:JobsView></jobs:JobsView>
+        <tasks:TasksView></tasks:TasksView>
     </Grid>
 </Window>

@@ -15,12 +15,12 @@ namespace Jobs.Common.Database.Tables
         /// <summary>
         /// 
         /// </summary>
-        public string NameText { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string DescriptionText { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// 

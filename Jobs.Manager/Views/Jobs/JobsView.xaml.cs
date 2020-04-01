@@ -23,7 +23,7 @@ namespace Jobs.Manager.Views.Jobs
             ViewModel = new JobsViewModel();
             ViewModel.JobGroups = new ObservableCollection<JobGroup>();
             var jobGroup1 = new JobGroup();
-            jobGroup1.Name = "Paren1";
+            jobGroup1.Name = "Parent1";
 
             var jobGroup1Child1 = new JobGroup();
             jobGroup1Child1.Name = "Child1";
@@ -36,8 +36,20 @@ namespace Jobs.Manager.Views.Jobs
             ViewModel.JobGroups.Add(jobGroup1);
 
             var jobGroup2 = new JobGroup();
-            jobGroup2.Name = "Paren2";
+            jobGroup2.Name = "Parent2";
             ViewModel.JobGroups.Add(jobGroup2);
+
+            var job = new Job();
+            job.NameText = "Merchant update";
+            job.DescriptionText = "Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test";
+
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
+            ViewModel.Jobs.Add(job);
 
             DataContext = ViewModel;
         }

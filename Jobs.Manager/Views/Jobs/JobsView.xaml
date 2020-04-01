@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Jobs.Manager.Views.Jobs"
              xmlns:self="clr-namespace:Jobs.Common.Database.Tables;assembly=Jobs.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000">
+             d:DesignHeight="800" d:DesignWidth="1000" Background="#e8e8e8">
 
     <UserControl.Resources>
         <ContextMenu x:Key="FolderContext"  StaysOpen="true">
@@ -42,33 +42,25 @@
         <Grid Margin="300,0,0,0">
             <Label Content="Jobs" FontSize="16" Margin="40,0,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
             <ScrollViewer>
-                <WrapPanel Margin="30,30,0,0" Orientation="Horizontal">
-                    <WrapPanel.Resources>
-                        <Style TargetType="{x:Type local:JobView}">
-                            <Setter Property="Margin" Value="0,0" />
-                            <Setter Property="Padding" Value="10,10" />
-                        </Style>
-                    </WrapPanel.Resources>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                    <local:JobView></local:JobView>
-                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding Jobs}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Margin="30,30,0,0" Orientation="Horizontal">
+                                <WrapPanel.Resources>
+                                    <Style TargetType="{x:Type local:JobView}">
+                                        <Setter Property="Margin" Value="0,0" />
+                                        <Setter Property="Padding" Value="10,10" />
+                                    </Style>
+                                </WrapPanel.Resources>
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <local:JobView TitleText="{Binding NameText}" DescriptonText="{Binding DescriptionText}"></local:JobView>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
     </Grid>

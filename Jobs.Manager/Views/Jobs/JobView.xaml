@@ -3,8 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="120" Width="200">
-    <Grid Background="Red">
-            
-    </Grid>
+             mc:Ignorable="d" Height="200" Width="300" Background="Transparent">
+    <Border BorderThickness="3" BorderBrush="White" CornerRadius="10">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Style.Triggers>
+                    <Trigger Property="Border.IsMouseOver" Value="True">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Direction="2" Opacity="0.15"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"  Text="{Binding TitleText}" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="3"></TextBlock>
+            <TextBlock Grid.Row="1" TextWrapping="WrapWithOverflow" Margin="5" Text="{Binding DescriptonText}">
+            </TextBlock>
+        </Grid>
+    </Border>
 </UserControl>

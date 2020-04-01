@@ -33,7 +33,7 @@ namespace Jobs.Manager.Views.Tasks
             InitializeComponent();
 
             Job = new Job();
-            Job.Name = "DotnetPublish";
+            Job.NameText = "DotnetPublish";
 
             var task = new Task();
             task.Name = "DotnetPublish";

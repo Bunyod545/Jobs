@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 
 namespace Jobs.Common.Database.Tables
 {
@@ -30,7 +31,28 @@ namespace Jobs.Common.Database.Tables
         /// <summary>
         /// 
         /// </summary>
-        public JsonObject TaskData { get; set; }
+        public string TaskData { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskData"></param>
+        public void SetTaskData(JsonObject taskData)
+        {
+            TaskData = JsonConvert.SerializeObject(taskData);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public JsonObject GetTaskData()
+        {
+            if (string.IsNullOrEmpty(TaskData))
+                return null;
+
+            return JsonConvert.DeserializeObject<JsonObject>(TaskData);
+        }
 
         /// <summary>
         /// 

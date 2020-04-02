@@ -62,6 +62,7 @@
     </ApplicationDefinition>
     <Compile Include="Logics\Services\Log\TaskCustomizedLogService.cs" />
     <Compile Include="Logics\Services\Log\TaskLogService.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Views\Jobs\JobsViews\JobsView.xaml.cs">
       <DependentUpon>JobsView.xaml</DependentUpon>
     </Compile>
@@ -73,6 +74,10 @@
     <Compile Include="Views\Jobs\JobsViews\JobsViewModel.cs" />
     <Compile Include="Views\Jobs\JobViewModel.cs" />
     <Compile Include="Views\Jobs\JobsViews\Models\TaskInfo.cs" />
+    <Compile Include="Views\Tasks\Components\EditTaskComponent.xaml.cs">
+      <DependentUpon>EditTaskComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Components\EditTaskComponentModel.cs" />
     <Compile Include="Views\Tasks\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
@@ -98,6 +103,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Components\EditTaskComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

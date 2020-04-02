@@ -58,10 +58,12 @@
     <Compile Include="Database\JobsDatabase.cs" />
     <Compile Include="Database\Tables\Job.cs" />
     <Compile Include="Database\Tables\JobGroup.cs" />
+    <Compile Include="Database\Tables\RegisteredTask.cs" />
     <Compile Include="Database\Tables\Task.cs" />
     <Compile Include="Helpers\ActivatorHelper.cs" />
     <Compile Include="Logics\Container\ServicesContainer.cs" />
     <Compile Include="Logics\Jobs\JobExecuter.cs" />
+    <Compile Include="Logics\TaskRegistrator\TaskRegistratorManager.cs" />
     <Compile Include="Logics\Tasks\Logics\Arguments\ArgumentInitializer.cs" />
     <Compile Include="Logics\Tasks\Logics\Arguments\TaskArgumentInitializer.cs" />
     <Compile Include="Logics\Tasks\Logics\Container\TaskServicesContainer.cs" />
@@ -80,5 +82,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

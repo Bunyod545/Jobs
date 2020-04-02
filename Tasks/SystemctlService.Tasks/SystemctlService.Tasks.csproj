@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Jobs.Manager\bin\Debug\Tasks\DotnetPublish.Tasks\</OutputPath>
+    <OutputPath>..\..\Jobs.Manager\bin\Debug\Tasks\SystemctlService.Tasks\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -39,11 +39,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemctlBaseTask.Properties.cs" />
     <Compile Include="SystemctlBaseTask.cs" />
-    <Compile Include="SystemctlRestartTask.cs" />
-    <Compile Include="SystemctlStartTask.cs" />
-    <Compile Include="SystemctlStatusTask.cs" />
-    <Compile Include="SystemctlStopTask.cs" />
+    <Compile Include="Tasks\SystemctlRestartTask.cs" />
+    <Compile Include="Tasks\SystemctlStartTask.cs" />
+    <Compile Include="Tasks\SystemctlStatusTask.cs" />
+    <Compile Include="Tasks\SystemctlStopTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Jobs.Tasks.Common\Jobs.Tasks.Common.csproj">
@@ -55,5 +56,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

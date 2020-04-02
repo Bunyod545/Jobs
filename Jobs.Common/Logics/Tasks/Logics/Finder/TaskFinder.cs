@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Jobs.Common.Database.Tables;
+using Jobs.Common.Logics.TaskRegistrator;
 
 namespace Jobs.Common.Logics.Tasks.Logics.Finder
 {
@@ -31,8 +32,11 @@ namespace Jobs.Common.Logics.Tasks.Logics.Finder
         /// <returns></returns>
         public Type FindType(Task task)
         {
-            var assembly = Assembly.LoadFrom(task.TaskLibraryPath);
-            return assembly.GetTypes().FirstOrDefault(f => f.Name == task.TaskClassName);
+            var taskInfo = task.RegisteredTask;
+            TaskRegistratorManager.RegisterAssembly(taskInfo.TaskLibraryPath);
+
+            var assembly = Assembly.LoadFrom(taskInfo.TaskLibraryPath);
+            return assembly.GetTypes().FirstOrDefault(f => f.Name == taskInfo.TaskClassName);
         }
     }
 }

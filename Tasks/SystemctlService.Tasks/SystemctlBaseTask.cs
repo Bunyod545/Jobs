@@ -1,46 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Services.Log;
 using Renci.SshNet;
+using Renci.SshNet.Common;
 
 namespace SystemctlService.Tasks
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract class SystemctlBaseTask : ITask
+    public abstract partial class SystemctlBaseTask : ITask
     {
         /// <summary>
         /// 
         /// </summary>
         private readonly ITaskLogService _log;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SftpHost { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SftpLogin { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string SftpPassword { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ServiceName { get; set; }
 
         /// <summary>
         /// 
@@ -57,57 +34,63 @@ namespace SystemctlService.Tasks
         /// <returns></returns>
         public virtual bool Execute()
         {
-            ExpectSSH(SftpHost, SftpLogin, SftpPassword);
-            return true;
-            var client = new SshClient(SftpHost, SftpLogin, SftpPassword);
+            var client = new SshClient(SshHost, SshLogin, SshPassword);
             client.Connect();
 
-            var shellStream = client.CreateShellStream("xterm", 80, 24, 800, 600, 1024);
-            SwithToRoot(SftpPassword, shellStream);
-            WriteStream($"systemctl {GetCommandName()} {ServiceName}", shellStream);
+            var termkvp = new Dictionary<TerminalModes, uint>();
+            termkvp.Add(TerminalModes.ECHO, 53);
+
+            var shellStream = client.CreateShellStream("xterm", 80, 24, 800, 600, 1024, termkvp);
+            SwithToRoot(SshPassword, shellStream);
+            WriteStream($"systemctl {GetCommandName()} {ServiceName} -l", shellStream);
 
             var result = ReadStream(shellStream);
-            client.Disconnect();
+            _log.Information(result);
 
+            if(IsWaitStatusChange())
+                WaitStatusChange(shellStream);
+
+            _log.Success("Execute systemctl finished!");
+            _log.Information(string.Empty);
+            _log.Information(string.Empty);
+
+            client.Disconnect();
             return true;
         }
 
-        public void ExpectSSH(string address, string login, string password)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected virtual bool IsWaitStatusChange()
         {
-            try
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shellStream"></param>
+        protected virtual void WaitStatusChange(ShellStream shellStream)
+        {
+            _log.Information("Waiting status!");
+            string newText;
+
+            while (true)
             {
-                SshClient sshClient = new SshClient(address, 22, login, password);
+                Thread.Sleep(1000);
 
-                sshClient.Connect();
-                IDictionary<Renci.SshNet.Common.TerminalModes, uint> termkvp = new Dictionary<Renci.SshNet.Common.TerminalModes, uint>();
-                termkvp.Add(Renci.SshNet.Common.TerminalModes.ECHO, 53);
+                WriteStream($"systemctl status {ServiceName} -l", shellStream);
+                newText = ReadStream(shellStream);
 
-                ShellStream shellStream = sshClient.CreateShellStream("xterm", 80, 24, 800, 600, 1024, termkvp);
+                if(newText.Contains("Press Ctrl+C to shut down"))
+                    break;
 
-
-                //Get logged in
-                string rep = shellStream.Expect(new Regex(@"[$>]")); //expect user prompt
-
-                //send command
-                shellStream.WriteLine("sudo su");
-                rep = shellStream.Expect(new Regex(@"([$#>:])")); //expect password or user prompt
-
-                //check to send password
-                if (rep.Contains(":"))
-                {
-                    //send password
-                    shellStream.WriteLine(password);
-                    rep = shellStream.Expect(new Regex(@"[$#>]")); //expect user or root prompt
-                }
-
-                sshClient.Disconnect();
-            }//try to open connection
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.ToString());
-                throw ex;
+                if (newText.Contains("entered failed state"))
+                    break;
             }
 
+            _log.Information(newText);
         }
 
         /// <summary>
@@ -115,7 +98,7 @@ namespace SystemctlService.Tasks
         /// </summary>
         /// <param name="cmd"></param>
         /// <param name="stream"></param>
-        private static void WriteStream(string cmd, ShellStream stream)
+        private void WriteStream(string cmd, ShellStream stream)
         {
             stream.WriteLine(cmd + "; echo this-is-the-end");
             while (stream.Length == 0)
@@ -127,7 +110,7 @@ namespace SystemctlService.Tasks
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
-        private static string ReadStream(ShellStream stream)
+        private string ReadStream(ShellStream stream)
         {
             var result = new StringBuilder();
 
@@ -143,28 +126,27 @@ namespace SystemctlService.Tasks
         /// </summary>
         /// <param name="password"></param>
         /// <param name="stream"></param>
-        private static void SwithToRoot(string password, ShellStream stream)
+        private void SwithToRoot(string password, ShellStream stream)
         {
             var prompt = stream.Expect(new Regex(@"[$>]"));
+            _log.Information(prompt);
 
             stream.WriteLine("sudo su");
             prompt = stream.Expect(new Regex(@"([$#>:])"));
+            _log.Information(prompt);
 
             if (!prompt.Contains(":"))
                 return;
 
             stream.WriteLine(password);
-            var str = ReadStream(stream);
             prompt = stream.Expect(new Regex(@"[$#>]"));
+            _log.Information(prompt);
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual string GetCommandName()
-        {
-            return string.Empty;
-        }
+        public abstract string GetCommandName();
     }
 }

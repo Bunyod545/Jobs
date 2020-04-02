@@ -6,9 +6,9 @@
         xmlns:tasks="clr-namespace:Jobs.Manager.Views.Tasks"
         xmlns:jobs="clr-namespace:Jobs.Manager.Views.Jobs"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" Loaded="MainWindow_OnLoaded">
+        Title="MainWindow" Height="800" Width="1000">
     <Grid>
-        <tasks:TasksView></tasks:TasksView>
-        <!--<jobs:JobsView></jobs:JobsView>-->
+        <!--<tasks:TasksView></tasks:TasksView>-->
+        <jobs:JobsView></jobs:JobsView>
     </Grid>
 </Window>

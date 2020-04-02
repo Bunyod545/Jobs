@@ -30,22 +30,104 @@ namespace Jobs.Manager.Views.Tasks
             InitializeComponent();
 
             Job = new Job();
-            Job.Name  = "DotnetPublish";
+            Job.Name = "DotnetPublish";
+            //RegisterTestPublishTask();
+            //RegisterTestSftpCopyTask();
+            RegisterTestSystemctlRestartTask();
+            //RegisterTestSystemctlStatusTask();
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void RegisterTestPublishTask()
+        {
             var task = new Task();
             task.Name = "DotnetPublish";
-            task.TaskClassName = "PublishTask";
-            task.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
+            task.RegisteredTask = new RegisteredTask();
+            task.RegisteredTask.TaskClassName = "PublishTask";
+            task.RegisteredTask.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
 
-            task.TaskData = new JsonObject();
-            task.TaskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
-            task.TaskData.Add("Configuration", "Release");
-            task.TaskData.Add("Framework", "netcoreapp2.2");
-            task.TaskData.Add("Runtime", "linux-x64");
-
+            var taskData = new JsonObject();
+            taskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
+            taskData.Add("Configuration", "Release");
+            taskData.Add("Framework", "netcoreapp2.2");
+            taskData.Add("Runtime", "linux-x64");
+            task.SetTaskData(taskData);
 
             TasksListBox.Items.Add(task);
             Job.Tasks.Add(task);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void RegisterTestSftpCopyTask()
+        {
+            var task = new Task();
+            task.Name = "SftpCopyTask";
+            task.RegisteredTask = new RegisteredTask();
+            task.RegisteredTask.TaskClassName = "SftpCopyTask";
+            task.RegisteredTask.TaskLibraryPath = "Tasks\\Sftp.Tasks\\Sftp.Tasks.dll";
+
+            var taskData = new JsonObject();
+            taskData.Add("SftpHost", "172.17.8.131");
+            taskData.Add("SftpLogin", "uzcard_admin");
+            taskData.Add("SftpPassword", "cU[a+A!#$~Wu6/?(");
+            taskData.Add("FromPath", @"D:\Projects\PaymentSystemsGitLab\src\Common\Services\Admin\AdminService\bin\Release\netcoreapp2.2\linux-x64\publish\");
+            taskData.Add("ToPath", "/home/uzcard_admin/Admin/Production");
+            task.SetTaskData(taskData);
+
+            TasksListBox.Items.Add(task);
+            Job.Tasks.Add(task);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void RegisterTestSystemctlRestartTask()
+        {
+            var task = new Task();
+            task.Name = "SystemctlRestartTask";
+            task.RegisteredTask = new RegisteredTask();
+            task.RegisteredTask.TaskClassName = "SystemctlRestartTask";
+            task.RegisteredTask.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
+
+            var taskData = new JsonObject();
+            taskData.Add("SshHost", "172.17.8.131");
+            taskData.Add("SshLogin", "uzcard_admin");
+            taskData.Add("SshPassword", "cU[a+A!#$~Wu6/?(");
+            taskData.Add("ServiceName", "payment_system_admin_service.service");
+            task.SetTaskData(taskData);
+
+            TasksListBox.Items.Add(task);
+            Job.Tasks.Add(task);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private void RegisterTestSystemctlStatusTask()
+        {
+            var task = new Task();
+            task.Name = "SystemctlStatusTask";
+            task.RegisteredTask = new RegisteredTask();
+            task.RegisteredTask.TaskClassName = "SystemctlStatusTask";
+            task.RegisteredTask.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
+
+            var taskData = new JsonObject();
+            taskData.Add("SshHost", "172.17.8.131");
+            taskData.Add("SshLogin", "uzcard_admin");
+            taskData.Add("SshPassword", "cU[a+A!#$~Wu6/?(");
+            taskData.Add("ServiceName", "payment_system_admin_service.service");
+            task.SetTaskData(taskData);
+
+            //TasksListBox.Items.Add(task);
+            //Job.Tasks.Add(task);
         }
 
         /// <summary>
@@ -57,6 +139,7 @@ namespace Jobs.Manager.Views.Tasks
         {
             var jobExecuter = new JobExecuter(Job);
             jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));
+            jobExecuter.Container.Register<ITaskCustomizedLogService>(new TaskCustomizedLogService(this));
             jobExecuter.Initialize();
             ExecuteButton.IsEnabled = false;
 
@@ -69,28 +152,6 @@ namespace Jobs.Manager.Views.Tasks
         private void OnExecuteFinished(Task<bool> result)
         {
             Dispatcher.Invoke(() => { ExecuteButton.IsEnabled = true; });
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="word"></param>
-        /// <param name="color"></param>
-        public void HighlightWordInRichTextBox(string word, Color color)
-        {
-            if (word == null)
-                return;
-
-            Dispatcher.Invoke(() =>
-            {
-                var paragraph = new Paragraph();
-                paragraph.Foreground = new SolidColorBrush(color);
-                paragraph.Inlines.Add(word);
-                paragraph.Margin = new Thickness(0, 0, 0, 2);
-
-                RichTextBox.Document.Blocks.Add(paragraph);
-                RichTextBox.ScrollToEnd();
-            });
         }
     }
 }

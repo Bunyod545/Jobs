@@ -10,16 +10,18 @@
 
     <UserControl.Resources>
         <ContextMenu x:Key="FolderContext"  StaysOpen="true">
-            <MenuItem Header="Add..." />
-            <MenuItem Header="Rename"/>
-            <MenuItem Header="Remove"/>
+            <MenuItem Header="Add..." Click="AddMenuItem_OnClick"/>
+            <MenuItem Header="Rename" Click="RenameMenuItem_OnClick"/>
+            <MenuItem Header="Remove" Click="RemoveMenuItem_OnClick"/>
         </ContextMenu>
     </UserControl.Resources>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid HorizontalAlignment="Left" Width="300">
             <Label Content="Job groups" FontSize="16" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
-            <TreeView Margin="0,30,0,0" FontSize="16" ContextMenu="{StaticResource FolderContext}" ItemsSource="{Binding JobGroups}">
+            <TextBox x:Name="JobAddTextBox" Height="35" VerticalAlignment="Top" Margin="0,35,75,0"></TextBox>
+            <Button Content="Add" Height="35" VerticalAlignment="Top" Margin="230,35,3,0" Click="ButtonAdd_Click"></Button>
+            <TreeView x:Name="JobGroupsTree" Margin="0,75,0,0" FontSize="16" ContextMenu="{StaticResource FolderContext}" ItemsSource="{Binding JobGroups}">
                 <TreeView.ItemContainerStyle>
                     <Style TargetType="{x:Type TreeViewItem}">
                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>

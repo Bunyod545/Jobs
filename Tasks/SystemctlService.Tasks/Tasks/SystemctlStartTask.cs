@@ -5,13 +5,13 @@ namespace SystemctlService.Tasks
     /// <summary>
     /// 
     /// </summary>
-    public class SystemctlRestartTask : SystemctlBaseTask
+    public class SystemctlStartTask : SystemctlBaseTask
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="log"></param>
-        public SystemctlRestartTask(ITaskLogService log) : base(log)
+        public SystemctlStartTask(ITaskLogService log) : base(log)
         {
         }
 
@@ -19,7 +19,16 @@ namespace SystemctlService.Tasks
         /// 
         /// </summary>
         /// <returns></returns>
-        public override bool Execute()
+        public override string GetCommandName()
+        {
+            return "start";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool IsWaitStatusChange()
         {
             return true;
         }

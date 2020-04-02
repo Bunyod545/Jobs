@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Globalization;
 using System.Text;
 using DotnetPublish.Tasks.Logics.Initializer;
 using Jobs.Tasks.Common;
@@ -42,6 +43,7 @@ namespace DotnetPublish.Tasks
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = GetArguments();
             startInfo.CreateNoWindow = true;
+            startInfo.StandardOutputEncoding = Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
 
             process.StartInfo = startInfo;
             process.OutputDataReceived += Cmd_OutputDataReceived;
@@ -99,6 +101,7 @@ namespace DotnetPublish.Tasks
             _log.Information(string.Empty);
             _log.Success("Publish success");
             _log.Information(string.Empty);
+            _log.Information(string.Empty);
         }
 
         /// <summary>
@@ -108,6 +111,7 @@ namespace DotnetPublish.Tasks
         {
             _log.Information(string.Empty);
             _log.Error("Publish failed");
+            _log.Information(string.Empty);
             _log.Information(string.Empty);
         }
     }

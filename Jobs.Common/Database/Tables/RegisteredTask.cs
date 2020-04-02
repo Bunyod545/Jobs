@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace Jobs.Common.Database.Tables
+﻿namespace Jobs.Common.Database.Tables
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Job
+    public class RegisteredTask
     {
         /// <summary>
         /// 
@@ -20,19 +18,11 @@ namespace Jobs.Common.Database.Tables
         /// <summary>
         /// 
         /// </summary>
-        public string Description { get; set; }
+        public string TaskLibraryPath { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<Task> Tasks { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Job()
-        {
-            Tasks = new List<Task>();
-        }
+        public string TaskClassName { get; set; }
     }
 }

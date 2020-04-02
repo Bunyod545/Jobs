@@ -19,7 +19,16 @@ namespace SystemctlService.Tasks
         /// 
         /// </summary>
         /// <returns></returns>
-        public override bool Execute()
+        public override string GetCommandName()
+        {
+            return "stop";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool IsWaitStatusChange()
         {
             return true;
         }

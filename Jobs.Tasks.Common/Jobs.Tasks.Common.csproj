@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -52,6 +53,7 @@
     <Compile Include="Logics\Initializer\Models\ITaskServicesRegistrator.cs" />
     <Compile Include="Logics\Initializer\Models\TaskInitializeOptions.cs" />
     <Compile Include="Logics\Services\Container\ITaskServicesContainer.cs" />
+    <Compile Include="Logics\Services\Log\ITaskCustomizedLogService.cs" />
     <Compile Include="Logics\Services\Log\ITaskLogService.cs" />
     <Compile Include="Logics\Tasks\ITask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

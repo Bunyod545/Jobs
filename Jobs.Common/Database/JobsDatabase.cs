@@ -31,6 +31,11 @@ namespace Jobs.Common.Database
         /// <summary>
         /// 
         /// </summary>
+        public static ILiteCollection<RegisteredTask> RegisteredTasks { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static LiteDatabase Database { get; }
 
         /// <summary>
@@ -42,6 +47,7 @@ namespace Jobs.Common.Database
             BsonMapper.Global.Entity<JobGroup>().DbRef(x => x.ChildGroups, nameof(JobGroups));
             BsonMapper.Global.Entity<JobGroup>().DbRef(x => x.Jobs, nameof(Jobs));
             BsonMapper.Global.Entity<Job>().DbRef(x => x.Tasks, nameof(Tasks));
+            BsonMapper.Global.Entity<Task>().DbRef(x => x.RegisteredTask, nameof(RegisteredTasks));
 
             JobGroups = Database.GetCollection<JobGroup>(nameof(JobGroups));
             Jobs = Database.GetCollection<Job>(nameof(Jobs));

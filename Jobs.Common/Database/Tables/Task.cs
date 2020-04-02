@@ -21,12 +21,7 @@ namespace Jobs.Common.Database.Tables
         /// <summary>
         /// 
         /// </summary>
-        public string TaskLibraryPath { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string TaskClassName { get; set; }
+        public RegisteredTask RegisteredTask { get; set; }
 
         /// <summary>
         /// 

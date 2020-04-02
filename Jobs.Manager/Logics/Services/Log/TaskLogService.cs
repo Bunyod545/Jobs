@@ -1,4 +1,6 @@
-﻿using System.Windows.Media;
+﻿using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
 using Jobs.Manager.Views.Tasks;
 using Jobs.Tasks.Common.Logics.Services.Log;
 
@@ -29,7 +31,7 @@ namespace Jobs.Manager.Logics.Services.Log
         /// <param name="msg"></param>
         public void Success(string msg)
         {
-            View.HighlightWordInRichTextBox(msg, Color.FromRgb(0, 255, 120));
+            HighlightWordInRichTextBox(msg, Color.FromRgb(0, 255, 120));
         }
 
         /// <summary>
@@ -38,7 +40,7 @@ namespace Jobs.Manager.Logics.Services.Log
         /// <param name="msg"></param>
         public void Information(string msg)
         {
-            View.HighlightWordInRichTextBox(msg, Color.FromRgb(255, 255, 255));
+            HighlightWordInRichTextBox(msg, Color.FromRgb(255, 255, 255));
         }
 
         /// <summary>
@@ -47,7 +49,7 @@ namespace Jobs.Manager.Logics.Services.Log
         /// <param name="msg"></param>
         public void Warning(string msg)
         {
-            View.HighlightWordInRichTextBox(msg, Color.FromRgb(255,255,0));
+            HighlightWordInRichTextBox(msg, Color.FromRgb(255,255,0));
         }
 
         /// <summary>
@@ -56,7 +58,29 @@ namespace Jobs.Manager.Logics.Services.Log
         /// <param name="msg"></param>
         public void Error(string msg)
         {
-            View.HighlightWordInRichTextBox(msg, Color.FromRgb(255,0,0));
+            HighlightWordInRichTextBox(msg, Color.FromRgb(255,0,0));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="word"></param>
+        /// <param name="color"></param>
+        public void HighlightWordInRichTextBox(string word, Color color)
+        {
+            if (word == null)
+                return;
+
+            View.Dispatcher.Invoke(() =>
+            {
+                var paragraph = new Paragraph();
+                paragraph.Foreground = new SolidColorBrush(color);
+                paragraph.Inlines.Add(word);
+                paragraph.Margin = new Thickness(0, 0, 0, 2);
+
+                View.RichTextBox.Document.Blocks.Add(paragraph);
+                View.RichTextBox.ScrollToEnd();
+            });
         }
     }
 }

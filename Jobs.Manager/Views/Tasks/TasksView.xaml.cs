@@ -126,8 +126,8 @@ namespace Jobs.Manager.Views.Tasks
             taskData.Add("ServiceName", "payment_system_admin_service.service");
             task.SetTaskData(taskData);
 
-            TasksListBox.Items.Add(task);
-            Job.Tasks.Add(task);
+            //TasksListBox.Items.Add(task);
+            //Job.Tasks.Add(task);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Jobs.Manager.Views.Tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonExecute_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ButtonExecute_Click(object sender, RoutedEventArgs e)
         {
             var jobExecuter = new JobExecuter(Job);
             jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));

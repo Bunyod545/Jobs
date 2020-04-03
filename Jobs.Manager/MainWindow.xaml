@@ -7,7 +7,7 @@
         xmlns:jobs="clr-namespace:Jobs.Manager.Views.Jobs"
         xmlns:jobsViews="clr-namespace:Jobs.Manager.Views.Jobs.JobsViews"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000">
+        Title="MainWindow" Height="800" Width="1000" WindowStartupLocation="CenterScreen">
     <Grid>
         <!--<tasks:TasksView></tasks:TasksView>-->
         <jobsViews:JobsView></jobsViews:JobsView>

@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Manager.Logics.Services.Log;
@@ -148,6 +146,17 @@ namespace Jobs.Manager.Views.Tasks
         private void OnExecuteFinished(Task<bool> result)
         {
             Dispatcher.Invoke(() => { ExecuteButton.IsEnabled = true; });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new TaskEditView();
+            window.ShowDialog();
         }
     }
 }

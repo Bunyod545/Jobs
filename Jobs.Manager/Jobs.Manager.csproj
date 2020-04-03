@@ -77,6 +77,13 @@
     </Compile>
     <Compile Include="Views\Jobs\JobsViews\JobsViewModel.cs" />
     <Compile Include="Views\Jobs\JobsViews\Models\TaskInfo.cs" />
+    <Compile Include="Views\Tasks\Components\TaskItemComponent.xaml.cs">
+      <DependentUpon>TaskItemComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Tasks\Components\TaskItemComponentModel.cs" />
+    <Compile Include="Views\Tasks\TaskEditView.xaml.cs">
+      <DependentUpon>TaskEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tasks\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
@@ -106,6 +113,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\Components\TaskItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

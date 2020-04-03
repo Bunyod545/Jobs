@@ -62,7 +62,6 @@
     </ApplicationDefinition>
     <Compile Include="Logics\Services\Log\TaskCustomizedLogService.cs" />
     <Compile Include="Logics\Services\Log\TaskLogService.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Views\Jobs\JobsViews\JobsView.xaml.cs">
       <DependentUpon>JobsView.xaml</DependentUpon>
     </Compile>
@@ -74,10 +73,13 @@
     <Compile Include="Views\Jobs\JobsViews\JobsViewModel.cs" />
     <Compile Include="Views\Jobs\JobViewModel.cs" />
     <Compile Include="Views\Jobs\JobsViews\Models\TaskInfo.cs" />
-    <Compile Include="Views\Tasks\Components\EditTaskComponent.xaml.cs">
-      <DependentUpon>EditTaskComponent.xaml</DependentUpon>
+    <Compile Include="Views\Tasks\Components\TaskItemComponent.xaml.cs">
+      <DependentUpon>TaskItemComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tasks\Components\EditTaskComponentModel.cs" />
+    <Compile Include="Views\Tasks\Components\TaskItemComponentModel.cs" />
+    <Compile Include="Views\Tasks\TaskEditView.xaml.cs">
+      <DependentUpon>TaskEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tasks\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
@@ -106,7 +108,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tasks\Components\EditTaskComponent.xaml">
+    <Page Include="Views\Tasks\Components\TaskItemComponent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Tasks\TaskEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

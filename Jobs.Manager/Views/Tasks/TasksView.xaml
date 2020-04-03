@@ -15,11 +15,20 @@
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" Grid.Column="0">
             <Grid Margin="7,5,0,0">
                 <CheckBox Content="Tasks" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold"/>
-                <Button Content="Add" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="40" Background="Gray" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Style="{DynamicResource MenusButtonStyle}"/>
+                <Button Content="Add" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="40" Background="Gray" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Style="{DynamicResource MenusButtonStyle}" Click="AddBtn_Click"/>
             </Grid>
-            <ListBox x:Name="TasksListBox" VerticalAlignment="Stretch">
-                <ListBoxItem>
-                    <tasks:EditTaskComponent/>
+            <ListBox x:Name="TasksListBox" HorizontalContentAlignment="Stretch" >
+                <ListBoxItem BorderThickness="0,0,0,0.3" BorderBrush="Black">
+                    <tasks:TaskItemComponent />
+                </ListBoxItem>
+                <ListBoxItem BorderThickness="0,0,0,0.3" BorderBrush="Black">
+                    <tasks:TaskItemComponent />
+                </ListBoxItem>
+                <ListBoxItem BorderThickness="0,0,0,0.3" BorderBrush="Black">
+                    <tasks:TaskItemComponent />
+                </ListBoxItem>
+                <ListBoxItem BorderThickness="0,0,0,0.3" BorderBrush="Black" >
+                    <tasks:TaskItemComponent />
                 </ListBoxItem>
             </ListBox>
         </StackPanel>
@@ -27,6 +36,6 @@
         <RichTextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Background="Black" Foreground="White" VerticalAlignment="Stretch" Margin="0,0,0,60" x:Name="RichTextBox" Grid.Column="1" >
             <FlowDocument></FlowDocument>
         </RichTextBox>
-        <Button Style="{DynamicResource MenusButtonStyle}" Background="Gray" x:Name="ExecuteButton" Content="Execute" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="122" Click="ButtonExecute_Click" Grid.Column="1"/>
+        <Button Style="{DynamicResource MenusButtonStyle}" Background="Gray" Foreground="White" x:Name="ExecuteButton" Content="Execute" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="122" Click="ButtonExecute_Click" Grid.Column="1"/>
     </Grid>
 </UserControl>

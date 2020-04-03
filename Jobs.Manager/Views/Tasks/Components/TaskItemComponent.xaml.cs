@@ -3,20 +3,20 @@
     /// <summary>
     /// 
     /// </summary>
-    public partial class EditTaskComponent
+    public partial class TaskItemComponent
     {
         /// <summary>
         /// 
         /// </summary>
-        public readonly EditTaskComponentModel ViewModel;
+        public readonly TaskItemComponentModel ViewModel;
 
         /// <summary>
         /// 
         /// </summary>
-        public EditTaskComponent()
+        public TaskItemComponent()
         {
             InitializeComponent();
-            ViewModel = new EditTaskComponentModel();
+            ViewModel = new TaskItemComponentModel();
             DataContext = ViewModel;
         }
 
@@ -24,7 +24,7 @@
         /// 
         /// </summary>
         /// <param name="viewModel"></param>
-        public EditTaskComponent(EditTaskComponentModel viewModel)
+        public TaskItemComponent(TaskItemComponentModel viewModel)
         {
             InitializeComponent();
             ViewModel = viewModel;

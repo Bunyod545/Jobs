@@ -68,26 +68,24 @@
     </ApplicationDefinition>
     <Compile Include="Logics\Services\Log\TaskCustomizedLogService.cs" />
     <Compile Include="Logics\Services\Log\TaskLogService.cs" />
-    <Compile Include="Views\Jobs\JobsViews\JobsView.xaml.cs">
+    <Compile Include="Views\Jobs\JobsView.xaml.cs">
       <DependentUpon>JobsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Jobs\JobsViews\Models\JobInfo.cs" />
+    <Compile Include="Views\Jobs\Models\JobInfo.cs" />
     <Compile Include="Views\Jobs\JobView.xaml.cs">
       <DependentUpon>JobView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Jobs\JobsViews\JobsViewModel.cs" />
-    <Compile Include="Views\Jobs\JobsViews\Models\TaskInfo.cs" />
-    <Compile Include="Views\Tasks\Components\TaskItemComponent.xaml.cs">
+    <Compile Include="Views\Jobs\JobsViewModel.cs" />
+    <Compile Include="Views\Tasks\TaskItemComponent.xaml.cs">
       <DependentUpon>TaskItemComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tasks\Components\TaskItemComponentModel.cs" />
+    <Compile Include="Views\Tasks\Models\TaskInfo.cs" />
     <Compile Include="Views\Tasks\TaskEditView.xaml.cs">
       <DependentUpon>TaskEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tasks\TasksView.xaml.cs">
       <DependentUpon>TasksView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Tasks\TasksViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,7 +102,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Jobs\JobsViews\JobsView.xaml">
+    <Page Include="Views\Jobs\JobsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,7 +114,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Tasks\Components\TaskItemComponent.xaml">
+    <Page Include="Views\Tasks\TaskItemComponent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,7 +163,7 @@
     <ProjectReference Include="..\Tasks\DotnetPublish.Tasks\DotnetPublish.Tasks.csproj">
       <Project>{84564a85-f8a4-46f1-8f32-c955b1ec8d7c}</Project>
       <Name>DotnetPublish.Tasks</Name>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tasks\Sftp.Tasks\Sftp.Tasks.csproj">
       <Project>{844b7220-aad3-413a-88a8-239889c99837}</Project>
@@ -179,7 +177,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Tasks\Models\" />
+    <Resource Include="Resources\Images\data-edit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\add.png" />

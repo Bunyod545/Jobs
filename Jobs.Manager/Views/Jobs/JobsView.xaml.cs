@@ -2,7 +2,8 @@
 using System.Linq;
 using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
-using Jobs.Manager.Views.Jobs.JobsViews.Models;
+using Jobs.Manager.Views.Jobs.Models;
+using Jobs.Manager.Views.Tasks;
 
 namespace Jobs.Manager.Views.Jobs.JobsViews
 {
@@ -60,6 +61,16 @@ namespace Jobs.Manager.Views.Jobs.JobsViews
         {
             e.Delete();
             ViewModel.Jobs.Remove(e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void JobView_OnImageClick(object sender, JobInfo e)
+        {
+            MainWindow.ShowTasksView(e);
         }
     }
 }

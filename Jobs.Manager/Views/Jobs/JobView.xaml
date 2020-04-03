@@ -17,6 +17,12 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ComponentButton" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
         <Style x:Key="ActionsStyle" TargetType="Button">
             <Setter Property="Visibility" Value="Hidden"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -36,7 +42,7 @@
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="TextAlignment" Value="Center"></Setter>
             <Setter Property="Cursor" Value="Arrow"/>
-            <Setter Property="Margin" Value="5,0,5,0"></Setter>
+            <Setter Property="Margin" Value="5,0,5,0"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsEdit}" Value="True">
                     <Setter Property="IsReadOnly" Value="False"/>
@@ -48,26 +54,25 @@
     </UserControl.Resources>
 
     <Border x:Name="Border" BorderThickness="3" BorderBrush="White" CornerRadius="10">
-        <Grid Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="95"></RowDefinition>
-                <RowDefinition Height="30"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button  Grid.Row="0" Margin="0,5,35,0" Style="{StaticResource ActionsStyle}" Click="EditButton_OnClick">
-                <Button.Content>
-                    <Path Stretch="Fill" Style="{StaticResource EditIcon}" Width="20" Height="20" Fill="Orange" />
-                </Button.Content>
-            </Button>
-            <Button Grid.Row="0" Margin="0,5,8,0" Style="{StaticResource ActionsStyle}" Click="DeleteButton_OnClick">
-                <Button.Content>
-                    <Path Stretch="Fill" Style="{StaticResource CancelIcon}" Width="20" Height="20" Fill="Orange" />
-                </Button.Content>
-            </Button>
-
-            <Image Grid.Row="0" Source="../../Resources/Images/add.png" Margin="55,0"/>
-            <TextBox Grid.Row="1" Text="{Binding Name}" FontSize="18" FontWeight="Bold"/>
-            <TextBox Grid.Row="2" Text="{Binding Description}" TextWrapping="WrapWithOverflow"/>
-        </Grid>
+        <Grid Background="White" MouseUp="UIElement_OnMouseUp">
+               <Grid.RowDefinitions>
+                   <RowDefinition Height="100"></RowDefinition>
+                   <RowDefinition Height="30"></RowDefinition>
+                   <RowDefinition></RowDefinition>
+               </Grid.RowDefinitions>
+               <Button  Grid.Row="0" Margin="0,5,35,0" Style="{StaticResource ActionsStyle}" Click="EditButton_OnClick" >
+                   <Button.Content>
+                       <Path Stretch="Fill" Style="{StaticResource EditIcon}" Width="20" Height="20" Fill="Orange" />
+                   </Button.Content>
+               </Button>
+               <Button Grid.Row="0" Margin="0,5,8,0" Style="{StaticResource ActionsStyle}" Click="DeleteButton_OnClick">
+                   <Button.Content>
+                       <Path Stretch="Fill" Style="{StaticResource CancelIcon}" Width="20" Height="20" Fill="Orange" />
+                   </Button.Content>
+               </Button>
+               <Image Grid.Row="0"  Margin="55,0" Source="../../Resources/Images/add.png" />
+               <TextBox Grid.Row="1" Text="{Binding Name}" FontSize="18" FontWeight="Bold"/>
+               <TextBox Grid.Row="2" Text="{Binding Description}" TextWrapping="WrapWithOverflow"/>
+           </Grid>
     </Border>
 </UserControl>

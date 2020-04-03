@@ -3,18 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tasks="clr-namespace:Jobs.Manager.Views.Tasks"
         mc:Ignorable="d"
-        Title="Task Edit View" Height="300" Width="500" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
-        <TextBox Width="300" Height="35" FontSize="15" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <ComboBox HorizontalAlignment="Center" Width="300" Height="35" Margin="0,20,0,0"/>
-        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-            <TextBox Width="210" Height="30" FontSize="15" FontWeight="SemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            <Button Style="{DynamicResource MenusButtonStyle}" Background="DarkGray" Width="70" Content=". . ." Foreground="White" FontSize="25" FontWeight="Bold" Margin="20,0,0,0" VerticalContentAlignment="Center"/>
-        </StackPanel>
-        <Grid Margin="0,30,0,0">
-            <Button HorizontalAlignment="Left" Content="Cancel" Width="100" Height="35" Style="{DynamicResource MenusButtonStyle}" Background="DarkGray" Foreground="Red" FontSize="15" FontWeight="SemiBold"/>
-            <Button HorizontalAlignment="Right" Content="Submit" Width="100" Height="35" Style="{DynamicResource MenusButtonStyle}" Background="DarkGray" Foreground="LawnGreen" FontSize="15" FontWeight="SemiBold"/>
-        </Grid>
-    </StackPanel>
+        Title="Task Edit View" Height="191.875" Width="251.25" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Name" VerticalAlignment="Top" Margin="10,10,43.375,0" Height="30"></Label>
+        <TextBox Text="{Binding Name}" Height="30" VerticalAlignment="Top" Margin="58,10,10,0"></TextBox>
+
+        <Label Content="Library" VerticalAlignment="Top" Margin="10,45,43.375,0" Height="30"/>
+        <ComboBox x:Name="TaskLibrariesComboBox" ItemsSource="{Binding Source={x:Static tasks:TaskEditView.TaskLibraryInfos}}" Height="30" VerticalAlignment="Top" Margin="58,45,10,0" SelectionChanged="TaskLibrary_OnSelectionChanged"/>
+
+        <Label Content="Task" VerticalAlignment="Top" Margin="10,80,43,0" Height="30"/>
+        <ComboBox x:Name="TaskClassesComboBox" Height="30" VerticalAlignment="Top" Margin="58,80,10,0" Text="{Binding TaskClassName}"/>
+
+        <Button Content="Save" Height="25" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,75,10" Click="SaveButton_Click"></Button>
+        <Button Content="Cancel" Height="25" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="CancelButton_Click"></Button>
+    </Grid>
 </Window>

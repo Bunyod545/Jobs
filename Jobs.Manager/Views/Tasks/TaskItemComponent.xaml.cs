@@ -1,34 +1,38 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
-using Jobs.Manager.Views.Jobs.Models;
+using Jobs.Manager.Views.Tasks.Models;
 
-namespace Jobs.Manager.Views.Jobs
+namespace Jobs.Manager.Views.Tasks
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public partial class JobView
+    public partial class TaskItemComponent
     {
         /// <summary>
         /// 
         /// </summary>
-        public JobInfo Model => DataContext as JobInfo;
+        public TaskInfo TaskInfo => DataContext as TaskInfo;
 
         /// <summary>
         /// 
         /// </summary>
-        public event EventHandler<JobInfo> Delete;
+        public event EventHandler<TaskInfo> TaskEdit;
 
         /// <summary>
         /// 
         /// </summary>
-        public event EventHandler<JobInfo> ComponentClick;
+        public event EventHandler<TaskInfo> TaskDelete;
 
         /// <summary>
         /// 
         /// </summary>
-        public JobView()
+        public event EventHandler<TaskInfo> TaskData;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TaskItemComponent()
         {
             InitializeComponent();
         }
@@ -38,12 +42,9 @@ namespace Jobs.Manager.Views.Jobs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void EditButton_OnClick(object sender, RoutedEventArgs e)
+        private void DataButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Model.IsEdit)
-                Model.Update();
-
-            Model.IsEdit = !Model.IsEdit;
+            TaskData?.Invoke(this, TaskInfo);
         }
 
         /// <summary>
@@ -51,9 +52,9 @@ namespace Jobs.Manager.Views.Jobs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
+        private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            Delete?.Invoke(this, Model);
+            TaskEdit?.Invoke(this, TaskInfo);
         }
 
         /// <summary>
@@ -61,9 +62,9 @@ namespace Jobs.Manager.Views.Jobs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            ComponentClick?.Invoke(this, Model);
+            TaskDelete?.Invoke(this, TaskInfo);
         }
     }
 }

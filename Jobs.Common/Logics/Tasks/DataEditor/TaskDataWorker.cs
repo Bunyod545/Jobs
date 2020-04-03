@@ -40,7 +40,6 @@ namespace Jobs.Common.Logics.Tasks.DataEditor
         public void SetDataJson(JsonObject dataJson)
         {
             Task.SetTaskData(dataJson);
-            JobsDatabase.Tasks.Update(Task);
         }
     }
 }

@@ -2,9 +2,11 @@
 using System.Windows;
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
+using Jobs.Common.Logics.Tasks.DataEditor;
 using Jobs.Manager.Logics.Services.Log;
+using Jobs.Manager.Views.Jobs.Models;
+using Jobs.Manager.Views.Tasks.Models;
 using Jobs.Tasks.Common.Logics.Services.Log;
-using RestSharp;
 using Task = Jobs.Common.Database.Tables.Task;
 using ThreadTask = System.Threading.Tasks.Task;
 
@@ -18,7 +20,7 @@ namespace Jobs.Manager.Views.Tasks
         /// <summary>
         /// 
         /// </summary>
-        public Job Job { get; set; }
+        public JobInfo JobInfo { get; private set; }
 
         /// <summary>
         /// 
@@ -26,102 +28,43 @@ namespace Jobs.Manager.Views.Tasks
         public TasksView()
         {
             InitializeComponent();
-
-            Job = new Job();
-            Job.Name = "DotnetPublish";
-            //RegisterTestPublishTask();
-            //RegisterTestSftpCopyTask();
-            RegisterTestSystemctlRestartTask();
-            //RegisterTestSystemctlStatusTask();
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        private void RegisterTestPublishTask()
+        /// <param name="jobInfo"></param>
+        public void SetJobInfo(JobInfo jobInfo)
         {
-            var task = new Task();
-            task.Name = "DotnetPublish";
-            task.TaskClassName = "PublishTask";
-            task.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
-
-            var taskData = new JsonObject();
-            taskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
-            taskData.Add("Configuration", "Release");
-            taskData.Add("Framework", "netcoreapp2.2");
-            taskData.Add("Runtime", "linux-x64");
-            task.SetTaskData(taskData);
-
-            TasksListBox.Items.Add(task);
-            Job.Tasks.Add(task);
+            JobInfo = jobInfo;
+            DataContext = jobInfo;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        private void RegisterTestSftpCopyTask()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            var task = new Task();
-            task.Name = "SftpCopyTask";
-            task.TaskClassName = "SftpCopyTask";
-            task.TaskLibraryPath = "Tasks\\Sftp.Tasks\\Sftp.Tasks.dll";
+            var window = new TaskEditView();
+            window.SetTaskInfo(new TaskInfo(JobInfo, new Task()));
 
-            var taskData = new JsonObject();
-            taskData.Add("SftpHost", "172.17.8.131");
-            taskData.Add("SftpLogin", "uzcard_admin");
-            taskData.Add("SftpPassword", "cU[a+A!#$~Wu6/?(");
-            taskData.Add("FromPath", @"D:\Projects\PaymentSystemsGitLab\src\Common\Services\Admin\AdminService\bin\Release\netcoreapp2.2\linux-x64\publish\");
-            taskData.Add("ToPath", "/home/uzcard_admin/Admin/Production");
-            task.SetTaskData(taskData);
+            var result = window.ShowDialog();
+            if (result != true)
+                return;
 
-            TasksListBox.Items.Add(task);
-            Job.Tasks.Add(task);
+            JobInfo.AddTask(window.TaskInfo);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        private void RegisterTestSystemctlRestartTask()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonGoToJobs_Click(object sender, RoutedEventArgs e)
         {
-            var task = new Task();
-            task.Name = "SystemctlRestartTask";
-            task.TaskClassName = "SystemctlRestartTask";
-            task.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
-
-            var taskData = new JsonObject();
-            taskData.Add("SshHost", "172.17.8.131");
-            taskData.Add("SshLogin", "uzcard_admin");
-            taskData.Add("SshPassword", "cU[a+A!#$~Wu6/?(");
-            taskData.Add("ServiceName", "payment_system_admin_service.service");
-            task.SetTaskData(taskData);
-
-            TasksListBox.Items.Add(task);
-            Job.Tasks.Add(task);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private void RegisterTestSystemctlStatusTask()
-        {
-            var task = new Task();
-            task.Name = "SystemctlStatusTask";
-            task.TaskClassName = "SystemctlStatusTask";
-            task.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
-
-            var taskData = new JsonObject();
-            taskData.Add("SshHost", "172.17.8.131");
-            taskData.Add("SshLogin", "uzcard_admin");
-            taskData.Add("SshPassword", "cU[a+A!#$~Wu6/?(");
-            taskData.Add("ServiceName", "payment_system_admin_service.service");
-            task.SetTaskData(taskData);
-
-            //TasksListBox.Items.Add(task);
-            //Job.Tasks.Add(task);
+            MainWindow.ShowJobsView();
         }
 
         /// <summary>
@@ -131,7 +74,7 @@ namespace Jobs.Manager.Views.Tasks
         /// <param name="e"></param>
         private void ButtonExecute_Click(object sender, RoutedEventArgs e)
         {
-            var jobExecuter = new JobExecuter(Job);
+            var jobExecuter = new JobExecuter(JobInfo.Source);
             jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));
             jobExecuter.Container.Register<ITaskCustomizedLogService>(new TaskCustomizedLogService(this));
             jobExecuter.Initialize();
@@ -153,10 +96,45 @@ namespace Jobs.Manager.Views.Tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private void TaskItemComponent_OnData(object sender, TaskInfo e)
+        {
+            var dataEditor = TaskDataEditorManager.GetDataEditor(e.Source);
+            if (dataEditor == null)
+                return;
+
+            dataEditor.DataWorker = new TaskDataWorker(e.Source);
+            dataEditor.ShowDialog();
+            JobInfo.Update();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TaskItemComponent_OnEdit(object sender, TaskInfo e)
         {
             var window = new TaskEditView();
-            window.ShowDialog();
+
+            window.SetTaskInfo(new TaskInfo(e.Source.Clone()));
+            var submitResult = window.ShowDialog();
+            if (submitResult != true)
+                return;
+
+            e.Name = window.TaskInfo.Name;
+            e.TaskLibraryPath = window.TaskInfo.TaskLibraryPath;
+            e.TaskClassName = window.TaskInfo.TaskClassName;
+            JobInfo.Update();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TaskItemComponent_OnDelete(object sender, TaskInfo e)
+        {
+            JobInfo.DeleteTask(e);
         }
     }
 }

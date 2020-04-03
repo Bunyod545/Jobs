@@ -10,7 +10,7 @@
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Label Content="Jobs" FontSize="16" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30" Background="White" TabIndex="1"></Label>
-        <Button Content="Add job" Height="30" VerticalAlignment="Top" Width="63" HorizontalAlignment="Left" TabIndex="0" Click="AddJobButton_Click"/>
+        <Button  Style="{DynamicResource MenusButtonStyle}" Content="Add job" Width="80" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" TabIndex="0" Click="AddJobButton_Click" Foreground="White"  Background="Orange" />
         <ScrollViewer Margin="0,35,0,0" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="JobsControl" ItemsSource="{Binding Jobs}">
                 <ItemsControl.ItemsPanel>
@@ -27,7 +27,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <local:JobView DataContext="{Binding}" Delete="JobView_OnDelete"></local:JobView>
+                        <local:JobView DataContext="{Binding}" Delete="JobView_OnDelete" ComponentClick="JobView_OnImageClick"></local:JobView>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

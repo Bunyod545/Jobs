@@ -68,6 +68,7 @@
     <Compile Include="Logics\Jobs\JobExecuter.cs" />
     <Compile Include="Logics\Tasks\DataEditor\TaskDataEditorManager.cs" />
     <Compile Include="Logics\Tasks\DataEditor\TaskDataWorker.cs" />
+    <Compile Include="Logics\Tasks\Finder\Models\TaskLibraryInfo.cs" />
     <Compile Include="Logics\Tasks\Finder\TaskFinder.cs" />
     <Compile Include="Logics\Tasks\Registrator\TaskRegistratorManager.cs" />
     <Compile Include="Logics\Tasks\Executer\Logics\Arguments\ArgumentInitializer.cs" />

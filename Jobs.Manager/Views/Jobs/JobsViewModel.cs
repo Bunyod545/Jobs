@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using Jobs.Manager.Views.Jobs.JobsViews.Models;
+using Jobs.Manager.Views.Jobs.Models;
 using Jobs.Tasks.Common.Models;
 
 namespace Jobs.Manager.Views.Jobs.JobsViews

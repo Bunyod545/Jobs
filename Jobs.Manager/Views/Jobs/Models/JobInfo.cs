@@ -1,8 +1,12 @@
-﻿using Jobs.Common.Database;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
+using Jobs.Manager.Views.Tasks.Models;
 using Jobs.Tasks.Common.Models;
 
-namespace Jobs.Manager.Views.Jobs.JobsViews.Models
+namespace Jobs.Manager.Views.Jobs.Models
 {
     /// <summary>
     /// 
@@ -35,6 +39,11 @@ namespace Jobs.Manager.Views.Jobs.JobsViews.Models
         /// <summary>
         /// 
         /// </summary>
+        public ObservableCollection<TaskInfo> Tasks { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsEdit { get; set; }
 
         /// <summary>
@@ -44,6 +53,31 @@ namespace Jobs.Manager.Views.Jobs.JobsViews.Models
         public JobInfo(Job source)
         {
             Source = source;
+
+            var sourceTasks = source.Tasks?.Select(s => new TaskInfo(this, s)).ToList() ?? new List<TaskInfo>();
+            Tasks = new ObservableCollection<TaskInfo>(sourceTasks);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskInfo"></param>
+        public void AddTask(TaskInfo taskInfo)
+        {
+            Tasks.Add(taskInfo);
+            Source.Tasks.Add(taskInfo.Source);
+            Update();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskInfo"></param>
+        public void DeleteTask(TaskInfo taskInfo)
+        {
+            Tasks.Remove(taskInfo);
+            Source.Tasks.Remove(taskInfo.Source);
+            Update();
         }
 
         /// <summary>

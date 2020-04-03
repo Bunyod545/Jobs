@@ -30,6 +30,16 @@ namespace Jobs.Common.Database.Tables
         /// <summary>
         /// 
         /// </summary>
+        public bool IsChecked { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Order { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="taskData"></param>
         public void SetTaskData(JsonObject taskData)
         {
@@ -55,6 +65,23 @@ namespace Jobs.Common.Database.Tables
         public override string ToString()
         {
             return Name;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Task Clone()
+        {
+            var task = new Task();
+            task.Name = Name;
+            task.IsChecked = IsChecked;
+            task.Order = Order;
+            task.TaskClassName = TaskClassName;
+            task.TaskLibraryPath = TaskLibraryPath;
+            task.TaskData = TaskData;
+
+            return task;
         }
     }
 }

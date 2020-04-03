@@ -1,37 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using Jobs.Tasks.Common.Models;
 
-namespace Jobs.Common.Database.Tables
+namespace Sftp.Tasks.Views
 {
     /// <summary>
     /// 
     /// </summary>
-    public class JobGroup
+    public class SftpCopyTaskEditorModel : BaseViewModel
     {
         /// <summary>
         /// 
         /// </summary>
-        public int Id { get; set; }
+        public string SftpHost { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get; set; }
+        public string SftpLogin { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<Job> Jobs { get; set; }
+        public string SftpPassword { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public List<JobGroup> ChildGroups { get; set; }
+        public string FromPath { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public JobGroup()
-        {
-        }
+        public string ToPath { get; set; }
     }
 }

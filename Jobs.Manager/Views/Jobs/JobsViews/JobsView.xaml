@@ -1,64 +1,36 @@
-﻿<UserControl x:Class="Jobs.Manager.Views.Jobs.JobsView"
+﻿<UserControl x:Class="Jobs.Manager.Views.Jobs.JobsViews.JobsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Jobs.Manager.Views.Jobs"
-             xmlns:self="clr-namespace:Jobs.Common.Database.Tables;assembly=Jobs.Common"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1000" Background="#e8e8e8">
 
-    <UserControl.Resources>
-        <ContextMenu x:Key="FolderContext"  StaysOpen="true">
-            <MenuItem Header="Add..." Click="AddMenuItem_OnClick"/>
-            <MenuItem Header="Rename" Click="RenameMenuItem_OnClick"/>
-            <MenuItem Header="Remove" Click="RemoveMenuItem_OnClick"/>
-        </ContextMenu>
-    </UserControl.Resources>
 
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid HorizontalAlignment="Left" Width="300">
-            <Label Content="Job groups" FontSize="16" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
-            <TextBox x:Name="JobAddTextBox" Height="35" VerticalAlignment="Top" Margin="0,35,75,0"></TextBox>
-            <Button Content="Add" Height="35" VerticalAlignment="Top" Margin="230,35,3,0" Click="ButtonAdd_Click"></Button>
-            <TreeView x:Name="JobGroupsTree" Margin="0,75,0,0" FontSize="16" ContextMenu="{StaticResource FolderContext}" ItemsSource="{Binding JobGroups}">
-                <TreeView.ItemContainerStyle>
-                    <Style TargetType="{x:Type TreeViewItem}">
-                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
-                        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
-                        <Setter Property="HorizontalAlignment" Value="Left"/>
-                    </Style>
-                </TreeView.ItemContainerStyle>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type self:JobGroup}" ItemsSource="{Binding ChildGroups}">
-                        <TextBlock Text="{Binding Name}"/>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </Grid>
-        <Grid Margin="300,0,0,0">
-            <Label Content="Jobs" FontSize="16" Margin="40,0,0,0" FontWeight="Bold" VerticalAlignment="Top" Height="30"></Label>
-            <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding Jobs}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Margin="30,30,0,0" Orientation="Horizontal">
-                                <WrapPanel.Resources>
-                                    <Style TargetType="{x:Type local:JobView}">
-                                        <Setter Property="Margin" Value="0,0" />
-                                        <Setter Property="Padding" Value="10,10" />
-                                    </Style>
-                                </WrapPanel.Resources>
-                            </WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <local:JobView DataContext="{Binding}"></local:JobView>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
+        <Label Content="Jobs" FontSize="16" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30" Background="White" TabIndex="1"></Label>
+        <Button Content="Add job" Height="30" VerticalAlignment="Top" Width="63" HorizontalAlignment="Left" TabIndex="0" Click="AddJobButton_Click"/>
+        <ScrollViewer Margin="0,35,0,0" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="JobsControl" ItemsSource="{Binding Jobs}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin="30,30,0,0" Orientation="Horizontal">
+                            <WrapPanel.Resources>
+                                <Style TargetType="{x:Type local:JobView}">
+                                    <Setter Property="Margin" Value="0,0" />
+                                    <Setter Property="Padding" Value="10,10" />
+                                </Style>
+                            </WrapPanel.Resources>
+                        </WrapPanel>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:JobView DataContext="{Binding}" Delete="JobView_OnDelete"></local:JobView>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

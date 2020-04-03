@@ -1,8 +1,12 @@
-﻿namespace Sftp.Tasks
+﻿using Jobs.Tasks.Common.Logics.DataEditor.Attributes;
+using Sftp.Tasks.Views;
+
+namespace Sftp.Tasks
 {
     /// <summary>
     /// 
     /// </summary>
+    [TaskDataEditor(typeof(SftpCopyTaskEditor))]
     public partial class SftpCopyTask
     {
         /// <summary>

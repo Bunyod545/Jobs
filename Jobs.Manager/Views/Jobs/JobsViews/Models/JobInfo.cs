@@ -1,30 +1,26 @@
 ﻿using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
+using Jobs.Tasks.Common.Models;
 
 namespace Jobs.Manager.Views.Jobs.JobsViews.Models
 {
     /// <summary>
     /// 
     /// </summary>
-    public class JobInfo
+    public class JobInfo : BaseViewModel
     {
         /// <summary>
         /// 
         /// </summary>
-        private readonly Job _source;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Id => _source.Id;
+        public readonly Job Source;
 
         /// <summary>
         /// 
         /// </summary>
         public string Name
         {
-            get => _source.Name;
-            set => _source.Name = value;
+            get => Source.Name;
+            set => Source.Name = value;
         }
 
         /// <summary>
@@ -32,9 +28,14 @@ namespace Jobs.Manager.Views.Jobs.JobsViews.Models
         /// </summary>
         public string Description
         {
-            get => _source.Description;
-            set => _source.Description = value;
+            get => Source.Description;
+            set => Source.Description = value;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsEdit { get; set; }
 
         /// <summary>
         /// 
@@ -42,15 +43,23 @@ namespace Jobs.Manager.Views.Jobs.JobsViews.Models
         /// <param name="source"></param>
         public JobInfo(Job source)
         {
-            _source = source;
+            Source = source;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void Save()
+        public void Update()
         {
-            JobsDatabase.Jobs.Update(_source);
+            JobsDatabase.Jobs.Update(Source);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Delete()
+        {
+            JobsDatabase.Jobs.Delete(Source.Id);
         }
     }
 }

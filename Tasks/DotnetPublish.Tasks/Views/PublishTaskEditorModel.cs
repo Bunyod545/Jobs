@@ -1,14 +1,12 @@
-﻿using DotnetPublish.Tasks.Views;
-using Jobs.Tasks.Common.Logics.DataEditor.Attributes;
+﻿using Jobs.Tasks.Common.Models;
 
-namespace DotnetPublish.Tasks
+namespace DotnetPublish.Tasks.Views
 {
     /// <summary>
     /// 
     /// </summary>
-    [TaskDataEditor(typeof(PublishTaskEditor))]
-    public partial class PublishTask
-    {
+    public class PublishTaskEditorModel : BaseViewModel
+    { 
         /// <summary>
         /// 
         /// </summary>

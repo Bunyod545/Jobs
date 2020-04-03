@@ -45,9 +45,8 @@ namespace Jobs.Manager.Views.Tasks
         {
             var task = new Task();
             task.Name = "DotnetPublish";
-            task.RegisteredTask = new RegisteredTask();
-            task.RegisteredTask.TaskClassName = "PublishTask";
-            task.RegisteredTask.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
+            task.TaskClassName = "PublishTask";
+            task.TaskLibraryPath = "Tasks\\DotnetPublish.Tasks\\DotnetPublish.Tasks.dll";
 
             var taskData = new JsonObject();
             taskData.Add("ProjectPath", "D:\\Projects\\PaymentSystemsGitLab\\src\\Common\\Services\\Admin\\AdminService\\AdminService.csproj");
@@ -68,9 +67,8 @@ namespace Jobs.Manager.Views.Tasks
         {
             var task = new Task();
             task.Name = "SftpCopyTask";
-            task.RegisteredTask = new RegisteredTask();
-            task.RegisteredTask.TaskClassName = "SftpCopyTask";
-            task.RegisteredTask.TaskLibraryPath = "Tasks\\Sftp.Tasks\\Sftp.Tasks.dll";
+            task.TaskClassName = "SftpCopyTask";
+            task.TaskLibraryPath = "Tasks\\Sftp.Tasks\\Sftp.Tasks.dll";
 
             var taskData = new JsonObject();
             taskData.Add("SftpHost", "172.17.8.131");
@@ -92,9 +90,8 @@ namespace Jobs.Manager.Views.Tasks
         {
             var task = new Task();
             task.Name = "SystemctlRestartTask";
-            task.RegisteredTask = new RegisteredTask();
-            task.RegisteredTask.TaskClassName = "SystemctlRestartTask";
-            task.RegisteredTask.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
+            task.TaskClassName = "SystemctlRestartTask";
+            task.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
 
             var taskData = new JsonObject();
             taskData.Add("SshHost", "172.17.8.131");
@@ -115,9 +112,8 @@ namespace Jobs.Manager.Views.Tasks
         {
             var task = new Task();
             task.Name = "SystemctlStatusTask";
-            task.RegisteredTask = new RegisteredTask();
-            task.RegisteredTask.TaskClassName = "SystemctlStatusTask";
-            task.RegisteredTask.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
+            task.TaskClassName = "SystemctlStatusTask";
+            task.TaskLibraryPath = "Tasks\\SystemctlService.Tasks\\SystemctlService.Tasks.dll";
 
             var taskData = new JsonObject();
             taskData.Add("SshHost", "172.17.8.131");

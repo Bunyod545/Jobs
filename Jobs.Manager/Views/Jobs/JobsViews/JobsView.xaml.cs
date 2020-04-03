@@ -1,19 +1,21 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
+using System.Linq;
 using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
 using Jobs.Manager.Views.Jobs.JobsViews.Models;
-using Jobs.Manager.Views.Tasks;
 
-namespace Jobs.Manager.Views.Jobs
+namespace Jobs.Manager.Views.Jobs.JobsViews
 {
     /// <summary>
     ///
     /// </summary>
     public partial class JobsView
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public static JobsView Current { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,10 +27,13 @@ namespace Jobs.Manager.Views.Jobs
         public JobsView()
         {
             InitializeComponent();
-            JobGroupsTree.SelectedItemChanged += JobGroupsTreeOnSelectedItemChanged;
+            Current = this;
+
+            var jobs = JobsDatabase.Jobs.FindAll().ToList();
+            var jobsInfos = jobs.Select(s => new JobInfo(s)).ToList(); 
 
             ViewModel = new JobsViewModel();
-            ViewModel.JobGroups = new ObservableCollection<JobGroupInfo>();
+            ViewModel.Jobs = new ObservableCollection<JobInfo>(jobsInfos);
 
             DataContext = ViewModel;
         }
@@ -38,13 +43,12 @@ namespace Jobs.Manager.Views.Jobs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void JobGroupsTreeOnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void AddJobButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var group = e.NewValue as JobGroupInfo;
-            if (group == null)
-                return;
+            var job = new Job();
+            JobsDatabase.Jobs.Insert(job);
 
-            ViewModel.SelectedJobGroup = group;
+            ViewModel.Jobs.Add(new JobInfo(job));
         }
 
         /// <summary>
@@ -52,45 +56,10 @@ namespace Jobs.Manager.Views.Jobs
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddMenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void JobView_OnDelete(object sender, JobInfo e)
         {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RenameMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RemoveMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonAdd_Click(object sender, RoutedEventArgs e)
-        {
-            var jobGroup = new JobGroup();
-            jobGroup.Name = JobAddTextBox.Text;
-            JobsDatabase.JobGroups.Insert(jobGroup);
-
-            if (JobGroupsTree.SelectedItem is JobGroup ownerGroup)
-            {
-                ownerGroup.ChildGroups.Add(jobGroup);
-                JobsDatabase.JobGroups.Update(ownerGroup);
-            }
+            e.Delete();
+            ViewModel.Jobs.Remove(e);
         }
     }
 }

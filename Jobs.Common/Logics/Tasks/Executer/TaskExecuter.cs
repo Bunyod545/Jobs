@@ -2,9 +2,9 @@
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Helpers;
 using Jobs.Common.Logics.Container;
+using Jobs.Common.Logics.Tasks.Finder;
 using Jobs.Common.Logics.Tasks.Logics.Arguments;
 using Jobs.Common.Logics.Tasks.Logics.Container;
-using Jobs.Common.Logics.Tasks.Logics.Finder;
 using Jobs.Common.Logics.Tasks.Logics.Initializer;
 using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Arguments;
@@ -30,11 +30,6 @@ namespace Jobs.Common.Logics.Tasks
         /// <summary>
         /// 
         /// </summary>
-        public TaskFinder TaskFinder { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public TaskInitializer TaskInitializer { get; }
 
         /// <summary>
@@ -49,7 +44,6 @@ namespace Jobs.Common.Logics.Tasks
         public TaskExecuter(Task task)
         {
             Task = task;
-            TaskFinder = new TaskFinder(task);
             TaskInitializer = new TaskInitializer();
             TaskArgumentInitializer = new TaskArgumentInitializer();
         }

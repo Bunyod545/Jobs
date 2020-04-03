@@ -15,11 +15,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="17*"/>
-            <ColumnDefinition Width="63*"/>
+            <ColumnDefinition Width="169*"/>
+            <ColumnDefinition Width="631*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" Grid.Column="0">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,607,0">
             <Grid Margin="7,5,0,0">
                 <CheckBox Content="Tasks" HorizontalContentAlignment="Left" VerticalAlignment="Center" Margin="0"/>
                 <Button Content="Add" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="40" Background="Gray" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Style="{DynamicResource MenusButtonStyle}"/>
@@ -58,7 +58,7 @@
             </ListBox>
         </StackPanel>
 
-        <RichTextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Background="Black" Foreground="White" VerticalAlignment="Stretch" Margin="0,0,0,60" x:Name="RichTextBox" Grid.Column="1" >
+        <RichTextBox VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Background="Black" Foreground="White" VerticalAlignment="Stretch" Margin="0,0,0,60" x:Name="RichTextBox" Grid.Column="1" HorizontalAlignment="Right" Width="608" >
             <FlowDocument></FlowDocument>
         </RichTextBox>
         <Button Style="{DynamicResource MenusButtonStyle}" Background="Gray" x:Name="ExecuteButton" Content="Execute" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="122" Click="ButtonExecute_Click" Grid.Column="1"/>

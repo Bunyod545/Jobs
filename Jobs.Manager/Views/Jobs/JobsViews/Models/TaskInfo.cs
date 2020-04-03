@@ -1,17 +1,17 @@
-﻿using Jobs.Common.Database;
-using Jobs.Common.Database.Tables;
+﻿using Jobs.Common.Database.Tables;
+using Jobs.Tasks.Common.Models;
 
 namespace Jobs.Manager.Views.Jobs.JobsViews.Models
 {
     /// <summary>
     /// 
     /// </summary>
-    public class TaskInfo
+    public class TaskInfo : BaseViewModel
     {
         /// <summary>
         /// 
         /// </summary>
-        private readonly Task _source;
+        public readonly Task Source;
 
         /// <summary>
         /// 
@@ -19,15 +19,7 @@ namespace Jobs.Manager.Views.Jobs.JobsViews.Models
         /// <param name="task"></param>
         public TaskInfo(Task task)
         {
-            _source = task;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Save()
-        {
-            JobsDatabase.Tasks.Update(_source);
+            Source = task;
         }
     }
 }

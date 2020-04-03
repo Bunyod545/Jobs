@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +47,7 @@
       <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Web" />
@@ -57,20 +61,21 @@
   <ItemGroup>
     <Compile Include="Database\JobsDatabase.cs" />
     <Compile Include="Database\Tables\Job.cs" />
-    <Compile Include="Database\Tables\JobGroup.cs" />
-    <Compile Include="Database\Tables\RegisteredTask.cs" />
     <Compile Include="Database\Tables\Task.cs" />
+    <Compile Include="Database\Tables\TestTable.cs" />
     <Compile Include="Helpers\ActivatorHelper.cs" />
     <Compile Include="Logics\Container\ServicesContainer.cs" />
     <Compile Include="Logics\Jobs\JobExecuter.cs" />
-    <Compile Include="Logics\TaskRegistrator\TaskRegistratorManager.cs" />
-    <Compile Include="Logics\Tasks\Logics\Arguments\ArgumentInitializer.cs" />
-    <Compile Include="Logics\Tasks\Logics\Arguments\TaskArgumentInitializer.cs" />
-    <Compile Include="Logics\Tasks\Logics\Container\TaskServicesContainer.cs" />
-    <Compile Include="Logics\Tasks\Logics\Container\TaskServicesRegistrator.cs" />
-    <Compile Include="Logics\Tasks\Logics\Finder\TaskFinder.cs" />
-    <Compile Include="Logics\Tasks\Logics\Initializer\TaskInitializer.cs" />
-    <Compile Include="Logics\Tasks\TaskExecuter.cs" />
+    <Compile Include="Logics\Tasks\DataEditor\TaskDataEditorManager.cs" />
+    <Compile Include="Logics\Tasks\DataEditor\TaskDataWorker.cs" />
+    <Compile Include="Logics\Tasks\Finder\TaskFinder.cs" />
+    <Compile Include="Logics\Tasks\Registrator\TaskRegistratorManager.cs" />
+    <Compile Include="Logics\Tasks\Executer\Logics\Arguments\ArgumentInitializer.cs" />
+    <Compile Include="Logics\Tasks\Executer\Logics\Arguments\TaskArgumentInitializer.cs" />
+    <Compile Include="Logics\Tasks\Executer\Logics\Container\TaskServicesContainer.cs" />
+    <Compile Include="Logics\Tasks\Executer\Logics\Container\TaskServicesRegistrator.cs" />
+    <Compile Include="Logics\Tasks\Executer\Logics\Initializer\TaskInitializer.cs" />
+    <Compile Include="Logics\Tasks\Executer\TaskExecuter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,4 +89,14 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.112.0\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>

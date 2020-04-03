@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using Jobs.Tasks.Common.Logics.Services.Log;
+using Sftp.Tasks.Helpers;
 
 namespace Sftp.Tasks
 {
@@ -57,7 +58,9 @@ namespace Sftp.Tasks
         /// <returns></returns>
         public bool Execute()
         {
-            var sftpClient = new SftpClient(SftpHost, SftpLogin, SftpPassword);
+            var decryptedPassword = SftpCopyPasswordHelper.Decrypt(SftpPassword);
+            var sftpClient = new SftpClient(SftpHost, SftpLogin, decryptedPassword);
+
             sftpClient.Connect();
             _log.Information("Files copy begin");
 
@@ -80,8 +83,8 @@ namespace Sftp.Tasks
         /// <returns></returns>
         private long GetTotalSize()
         {
-            var di = new DirectoryInfo(FromPath);
-            return di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
+            var directoryInfo = new DirectoryInfo(FromPath);
+            return directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);
         }
 
         /// <summary>
@@ -93,7 +96,7 @@ namespace Sftp.Tasks
         private void UploadDirectory(SftpClient client, string localPath, string remotePath)
         {
             var infos = new DirectoryInfo(localPath).EnumerateFileSystemInfos().ToList();
-            infos.ForEach(f => CopyByFileSystemInfo(client, f, localPath, remotePath));
+            infos.ForEach(f => CopyByFileSystemInfo(client, f, remotePath));
         }
 
         /// <summary>
@@ -101,17 +104,16 @@ namespace Sftp.Tasks
         /// </summary>
         /// <param name="client"></param>
         /// <param name="info"></param>
-        /// <param name="localPath"></param>
         /// <param name="remotePath"></param>
-        private void CopyByFileSystemInfo(SftpClient client, FileSystemInfo info, string localPath, string remotePath)
+        private void CopyByFileSystemInfo(SftpClient client, FileSystemInfo info, string remotePath)
         {
             if (info.Attributes.HasFlag(FileAttributes.Directory))
             {
-                CopyDirectory(client, info, localPath, remotePath);
+                CopyDirectory(client, info, remotePath);
                 return;
             }
 
-            CopyFile(client, info, localPath, remotePath);
+            CopyFile(client, info, remotePath);
         }
 
         /// <summary>
@@ -119,9 +121,8 @@ namespace Sftp.Tasks
         /// </summary>
         /// <param name="client"></param>
         /// <param name="info"></param>
-        /// <param name="localPath"></param>
         /// <param name="remotePath"></param>
-        private void CopyDirectory(SftpClient client, FileSystemInfo info, string localPath, string remotePath)
+        private void CopyDirectory(SftpClient client, FileSystemInfo info, string remotePath)
         {
             var subPath = remotePath + "/" + info.Name;
             if (!client.Exists(subPath))
@@ -135,9 +136,8 @@ namespace Sftp.Tasks
         /// </summary>
         /// <param name="client"></param>
         /// <param name="info"></param>
-        /// <param name="localPath"></param>
         /// <param name="remotePath"></param>
-        private void CopyFile(SftpClient client, FileSystemInfo info, string localPath, string remotePath)
+        private void CopyFile(SftpClient client, FileSystemInfo info, string remotePath)
         {
             using (Stream fileStream = new FileStream(info.FullName, FileMode.Open))
                 client.UploadFile(fileStream, remotePath + "/" + info.Name, true);
@@ -171,12 +171,22 @@ namespace Sftp.Tasks
                 richTextBox.ScrollToEnd();
             }
 
-            var totalMb = _filesTotalSize / 1024 / 1024;
-            var needCopyMb = _filesCopiedSize / 1024 / 1024;
+            var totalMb = BytesToMb(_filesTotalSize);
+            var needCopyMb = BytesToMb(_filesCopiedSize);
             var copiedMb = totalMb - needCopyMb;
 
             _paragraph.Inlines.Clear();
             _paragraph.Inlines.Add($"Files copy {copiedMb} mb/{totalMb} mb");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        private long BytesToMb(long bytes)
+        {
+            return bytes / 1024 / 1024;
         }
     }
 }

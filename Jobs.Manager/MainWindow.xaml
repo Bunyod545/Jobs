@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:tasks="clr-namespace:Jobs.Manager.Views.Tasks"
         xmlns:jobs="clr-namespace:Jobs.Manager.Views.Jobs"
+        xmlns:jobsViews="clr-namespace:Jobs.Manager.Views.Jobs.JobsViews"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1000">
     <Grid>
         <!--<tasks:TasksView></tasks:TasksView>-->
-        <jobs:JobsView></jobs:JobsView>
+        <jobsViews:JobsView></jobsViews:JobsView>
     </Grid>
 </Window>

@@ -9,7 +9,7 @@
         Title="Publish task data editor" Height="209.688" Width="256.25" WindowStartupLocation="CenterScreen" Loaded="PublishTaskEditor_OnLoaded" ResizeMode="NoResize">
     <Grid>
         <Label Content="Project" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding ProjectPath}"  HorizontalAlignment="Left" Height="23" Margin="106,13,0,0" VerticalAlignment="Top" Width="95"/>
+        <TextBox Text="{Binding ProjectPath}"  HorizontalAlignment="Left" Height="23" Margin="106,13,0,0" VerticalAlignment="Top" Width="95" TextWrapping="NoWrap"/>
         <Button Content="..." HorizontalAlignment="Left" Height="21" Margin="206,14,0,0" VerticalAlignment="Top" Width="20" Click="ProjectBrowseButton_Click"/>
 
         <Label Content="Configuration" HorizontalAlignment="Left" Margin="18,41,0,0" VerticalAlignment="Top"/>

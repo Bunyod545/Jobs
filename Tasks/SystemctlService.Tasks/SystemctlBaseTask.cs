@@ -3,7 +3,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Jobs.Tasks.Common;
+using Jobs.Tasks.Common.Helpers;
 using Jobs.Tasks.Common.Logics.Services.Log;
+using Jobs.Tasks.Common.Logics.Tasks;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
@@ -34,14 +36,15 @@ namespace SystemctlService.Tasks
         /// <returns></returns>
         public virtual bool Execute()
         {
-            var client = new SshClient(SshHost, SshLogin, SshPassword);
+            var decryptedPassword = PasswordHelper.Decrypt(SshPassword);
+            var client = new SshClient(SshHost, SshLogin, decryptedPassword);
             client.Connect();
 
             var termkvp = new Dictionary<TerminalModes, uint>();
             termkvp.Add(TerminalModes.ECHO, 53);
 
             var shellStream = client.CreateShellStream("xterm", 80, 24, 800, 600, 1024, termkvp);
-            SwithToRoot(SshPassword, shellStream);
+            SwithToRoot(decryptedPassword, shellStream);
             WriteStream($"systemctl {GetCommandName()} {ServiceName} -l", shellStream);
 
             var result = ReadStream(shellStream);

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Jobs.Common.Logics.TaskRegistrator;
 using Jobs.Common.Logics.Tasks.Finder.Models;
-using Jobs.Tasks.Common;
+using Jobs.Tasks.Common.Logics.Tasks;
 using Task = Jobs.Common.Database.Tables.Task;
 
 namespace Jobs.Common.Logics.Tasks.Finder
@@ -32,8 +31,6 @@ namespace Jobs.Common.Logics.Tasks.Finder
         /// <returns></returns>
         public static Type FindType(Task task)
         {
-            TaskRegistratorManager.RegisterAssembly(task.TaskLibraryPath);
-
             var assembly = Assembly.LoadFrom(task.TaskLibraryPath);
             return assembly.GetTypes().FirstOrDefault(f => f.Name == task.TaskClassName);
         }

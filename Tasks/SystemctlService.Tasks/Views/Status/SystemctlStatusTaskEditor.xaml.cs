@@ -1,23 +1,22 @@
 ﻿using System.Windows;
-using System.Windows.Forms;
 using Jobs.Tasks.Common.Helpers;
 
-namespace Sftp.Tasks.Views
+namespace SystemctlService.Tasks.Views.Status
 {
     /// <summary>
     ///
     /// </summary>
-    public partial class SftpCopyTaskEditor
+    public partial class SystemctlStatusTaskEditor
     {
         /// <summary>
         /// 
         /// </summary>
-        public SftpCopyTaskEditorModel ViewModel { get; private set; }
+        public SystemctlStatusTaskEditorModel ViewModel { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public SftpCopyTaskEditor()
+        public SystemctlStatusTaskEditor()
         {
             InitializeComponent();
         }
@@ -29,22 +28,9 @@ namespace Sftp.Tasks.Views
         /// <param name="e"></param>
         private void SftpCopyTaskEditor_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = GetTaskData<SftpCopyTaskEditorModel>() ?? new SftpCopyTaskEditorModel();
+            ViewModel = GetTaskData<SystemctlStatusTaskEditorModel>() ?? new SystemctlStatusTaskEditorModel();
             DataContext = ViewModel;
-            PasswordBox.Password = PasswordHelper.Decrypt(ViewModel.SftpPassword);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FromBaseButton_Click(object sender, RoutedEventArgs e)
-        {
-            var folderBrowserDialog = new FolderBrowserDialog();
-            folderBrowserDialog.ShowDialog();
-
-            ViewModel.FromPath = folderBrowserDialog.SelectedPath;
+            PasswordBox.Password = PasswordHelper.Decrypt(ViewModel.SshPassword);
         }
 
         /// <summary>
@@ -55,7 +41,7 @@ namespace Sftp.Tasks.Views
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(PasswordBox.Password))
-                ViewModel.SftpPassword = PasswordHelper.Encrypt(PasswordBox.Password);
+                ViewModel.SshPassword = PasswordHelper.Encrypt(PasswordBox.Password);
 
             SetTaskData(ViewModel);
             Close();

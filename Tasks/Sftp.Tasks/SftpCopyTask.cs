@@ -6,7 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using Jobs.Tasks.Common.Helpers;
 using Jobs.Tasks.Common.Logics.Services.Log;
+using Jobs.Tasks.Common.Logics.Tasks;
 using Sftp.Tasks.Helpers;
 
 namespace Sftp.Tasks
@@ -58,7 +60,7 @@ namespace Sftp.Tasks
         /// <returns></returns>
         public bool Execute()
         {
-            var decryptedPassword = SftpCopyPasswordHelper.Decrypt(SftpPassword);
+            var decryptedPassword = PasswordHelper.Decrypt(SftpPassword);
             var sftpClient = new SftpClient(SftpHost, SftpLogin, decryptedPassword);
 
             sftpClient.Connect();

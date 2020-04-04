@@ -8,7 +8,7 @@
         Title="Task Edit View" Height="191.875" Width="251.25" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Name" VerticalAlignment="Top" Margin="10,10,43.375,0" Height="30"></Label>
-        <TextBox Text="{Binding Name}" Height="30" VerticalAlignment="Top" Margin="58,10,10,0"></TextBox>
+        <TextBox Text="{Binding Name}" Height="30" VerticalAlignment="Top" Margin="58,10,10,0" TextWrapping="NoWrap" VerticalContentAlignment="Center"></TextBox>
 
         <Label Content="Library" VerticalAlignment="Top" Margin="10,45,43.375,0" Height="30"/>
         <ComboBox x:Name="TaskLibrariesComboBox" ItemsSource="{Binding Source={x:Static tasks:TaskEditView.TaskLibraryInfos}}" Height="30" VerticalAlignment="Top" Margin="58,45,10,0" SelectionChanged="TaskLibrary_OnSelectionChanged"/>

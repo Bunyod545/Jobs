@@ -6,11 +6,11 @@ using Jobs.Common.Logics.Tasks.Finder;
 using Jobs.Common.Logics.Tasks.Logics.Arguments;
 using Jobs.Common.Logics.Tasks.Logics.Container;
 using Jobs.Common.Logics.Tasks.Logics.Initializer;
-using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Arguments;
 using Jobs.Tasks.Common.Logics.Services.Container;
+using Jobs.Tasks.Common.Logics.Tasks;
 
-namespace Jobs.Common.Logics.Tasks
+namespace Jobs.Common.Logics.Tasks.Executer
 {
     /// <summary>
     /// 

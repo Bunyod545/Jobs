@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using Jobs.Common.Helpers;
-using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Arguments;
 using Jobs.Tasks.Common.Logics.Arguments.Attributes;
+using Jobs.Tasks.Common.Logics.Tasks;
 using RestSharp;
 
 namespace Jobs.Common.Logics.Tasks.Logics.Arguments
@@ -32,7 +32,7 @@ namespace Jobs.Common.Logics.Tasks.Logics.Arguments
 
             var customArgInitializer = ActivatorHelper.CreateInstance(attr.ArgumentInitializerType) as IArgumentInitializer;
             var argInitializer = customArgInitializer ?? defaultArgInitializer;
-            argInitializer?.SetArguments(task, taskData);
+            argInitializer.SetArguments(task, taskData);
         }
     }
 }

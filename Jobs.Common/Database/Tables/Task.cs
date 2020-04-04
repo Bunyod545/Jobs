@@ -17,6 +17,7 @@ namespace Jobs.Common.Database.Tables
         /// 
         /// </summary>
         public string TaskLibraryPath { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -1,10 +1,13 @@
-﻿using Jobs.Tasks.Common.Logics.Services.Log;
+﻿using SystemctlService.Tasks.Views.Status;
+using Jobs.Tasks.Common.Logics.DataEditor.Attributes;
+using Jobs.Tasks.Common.Logics.Services.Log;
 
 namespace SystemctlService.Tasks
 {
     /// <summary>
     /// 
     /// </summary>
+    [TaskDataEditor(typeof(SystemctlStatusTaskEditor))]
     public class SystemctlStatusTask : SystemctlBaseTask
     {
         /// <summary>

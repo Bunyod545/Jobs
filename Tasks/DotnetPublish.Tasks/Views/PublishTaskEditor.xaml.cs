@@ -19,7 +19,6 @@ namespace DotnetPublish.Tasks.Views
         public PublishTaskEditor()
         {
             InitializeComponent();
-
         }
 
         /// <summary>
@@ -55,6 +54,7 @@ namespace DotnetPublish.Tasks.Views
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             SetTaskData(ViewModel);
+            DialogResult = true;
             Close();
         }
 
@@ -65,6 +65,7 @@ namespace DotnetPublish.Tasks.Views
         /// <param name="e"></param>
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
+            DialogResult = false;
             Close();
         }
     }

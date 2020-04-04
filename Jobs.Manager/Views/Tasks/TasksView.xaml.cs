@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
-using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Common.Logics.Tasks.DataEditor;
 using Jobs.Manager.Logics.Services.Log;
@@ -36,6 +35,7 @@ namespace Jobs.Manager.Views.Tasks
         /// <param name="jobInfo"></param>
         public void SetJobInfo(JobInfo jobInfo)
         {
+            RichTextBox.Document.Blocks.Clear();
             JobInfo = jobInfo;
             DataContext = jobInfo;
         }
@@ -78,8 +78,8 @@ namespace Jobs.Manager.Views.Tasks
             jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));
             jobExecuter.Container.Register<ITaskCustomizedLogService>(new TaskCustomizedLogService(this));
             jobExecuter.Initialize();
-            ExecuteButton.IsEnabled = false;
 
+            ExecuteButton.IsEnabled = false;
             ThreadTask.Run(() => jobExecuter.Execute()).ContinueWith(OnExecuteFinished);
         }
 
@@ -115,8 +115,8 @@ namespace Jobs.Manager.Views.Tasks
         private void TaskItemComponent_OnEdit(object sender, TaskInfo e)
         {
             var window = new TaskEditView();
-
             window.SetTaskInfo(new TaskInfo(e.Source.Clone()));
+
             var submitResult = window.ShowDialog();
             if (submitResult != true)
                 return;
@@ -135,6 +135,16 @@ namespace Jobs.Manager.Views.Tasks
         private void TaskItemComponent_OnDelete(object sender, TaskInfo e)
         {
             JobInfo.DeleteTask(e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Clear_Click(object sender, RoutedEventArgs e)
+        {
+            RichTextBox.Document.Blocks.Clear();
         }
     }
 }

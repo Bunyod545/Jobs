@@ -12,16 +12,18 @@
             <ColumnDefinition Width="70*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Vertical" Grid.Column="0" Background="White">
-            <Grid Margin="7,5,0,0">
-                <Label Content="Tasks" VerticalContentAlignment="Center" FontSize="15" FontWeight="SemiBold" HorizontalAlignment="Right" Width="233"/>
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+            <Grid Height="50" VerticalAlignment="Top">
+                <Label Margin="10,0,0,0" Content="Tasks" VerticalContentAlignment="Center" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="233"/>
                 <Button Content="Add" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="40" Background="Orange" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Style="{DynamicResource MenusButtonStyle}" Click="AddBtn_Click"/>
             </Grid>
-            <ListBox x:Name="TasksListBox" MinHeight="300" Height="405" ItemsSource="{Binding Tasks}">
+            <ListBox Margin="0,50,0,0" VerticalAlignment="Stretch" x:Name="TasksListBox" ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <ListBoxItem >
-                            <tasks:TaskItemComponent DataContext="{Binding}" TaskEdit="TaskItemComponent_OnEdit" TaskDelete="TaskItemComponent_OnDelete" TaskData="TaskItemComponent_OnData" />
+                        <ListBoxItem>
+                            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <tasks:TaskItemComponent DataContext="{Binding}" TaskEdit="TaskItemComponent_OnEdit" TaskDelete="TaskItemComponent_OnDelete" TaskData="TaskItemComponent_OnData" />
+                            </DockPanel>
                         </ListBoxItem>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -33,12 +35,13 @@
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>
-        </StackPanel>
+        </Grid>
         <Grid Grid.Column="1">
             <RichTextBox Margin="0,0,0,60" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Background="Black" Foreground="White" VerticalAlignment="Stretch" x:Name="RichTextBox" HorizontalAlignment="Stretch">
                 <FlowDocument></FlowDocument>
             </RichTextBox>
-            <Button Style="{DynamicResource MenusButtonStyle}" Background="Gray" Foreground="White" x:Name="GoToJobsButton" Content="Go to Jobs" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,137,10" VerticalAlignment="Bottom" Width="122" Click="ButtonGoToJobs_Click" />
+            <Button Style="{DynamicResource MenusButtonStyle}" Background="Orange" Foreground="White" x:Name="Clear" Content="Clear" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Left" Height="40" Margin="5,0,0,10" VerticalAlignment="Bottom" Width="122" Click="Clear_Click" />
+            <Button Style="{DynamicResource MenusButtonStyle}" Background="Orange" Foreground="White" x:Name="GoToJobsButton" Content="Go to Jobs" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,137,10" VerticalAlignment="Bottom" Width="122" Click="ButtonGoToJobs_Click" />
             <Button Style="{DynamicResource MenusButtonStyle}" Background="Orange" Foreground="White" x:Name="ExecuteButton" Content="Execute" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Height="40" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="122" Click="ButtonExecute_Click"/>
         </Grid>
     </Grid>

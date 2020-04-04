@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
-using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Arguments;
+using Jobs.Tasks.Common.Logics.Tasks;
 using RestSharp;
 
 namespace Jobs.Common.Logics.Tasks.Logics.Arguments

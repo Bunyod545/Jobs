@@ -2,6 +2,7 @@
 using Jobs.Common.Logics.Tasks;
 using System.Linq;
 using Jobs.Common.Logics.Container;
+using Jobs.Common.Logics.Tasks.Executer;
 
 namespace Jobs.Common.Logics.Jobs
 {
@@ -51,7 +52,10 @@ namespace Jobs.Common.Logics.Jobs
             if (Job?.Tasks == null)
                 return true;
 
-            var taskExecuters = Job.Tasks.Select(s => new TaskExecuter(s)).ToList();
+            var taskExecuters = Job.Tasks
+                .Where(w => w.IsChecked)
+                .Select(s => new TaskExecuter(s)).ToList();
+
             taskExecuters.ForEach(f => f.Initialize());
             Container.Initialize();
 

@@ -21,11 +21,6 @@ namespace Jobs.Common.Database
         /// <summary>
         /// 
         /// </summary>
-        public static ILiteCollection<Task> Tasks { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
         public static LiteDatabase Database { get; }
 
         /// <summary>
@@ -35,7 +30,6 @@ namespace Jobs.Common.Database
         {
             Database = new LiteDatabase(DatabaseName);
             Jobs = Database.GetCollection<Job>(nameof(Jobs));
-            Tasks = Database.GetCollection<Task>(nameof(Tasks));
         }
     }
 }

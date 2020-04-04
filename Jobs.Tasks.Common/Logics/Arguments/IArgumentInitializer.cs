@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Jobs.Tasks.Common.Logics.Tasks;
+using RestSharp;
 
 namespace Jobs.Tasks.Common.Logics.Arguments
 {

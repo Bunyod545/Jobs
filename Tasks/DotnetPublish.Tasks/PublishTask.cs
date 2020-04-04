@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Text;
 using DotnetPublish.Tasks.Logics.Initializer;
-using Jobs.Tasks.Common;
 using Jobs.Tasks.Common.Logics.Initializer.Attributes;
 using Jobs.Tasks.Common.Logics.Services.Log;
+using Jobs.Tasks.Common.Logics.Tasks;
 
 namespace DotnetPublish.Tasks
 {

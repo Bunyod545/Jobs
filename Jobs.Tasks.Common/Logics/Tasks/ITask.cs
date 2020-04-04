@@ -1,4 +1,4 @@
-﻿namespace Jobs.Tasks.Common
+﻿namespace Jobs.Tasks.Common.Logics.Tasks
 {
     /// <summary>
     /// 

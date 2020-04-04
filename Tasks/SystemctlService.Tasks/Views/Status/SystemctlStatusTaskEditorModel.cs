@@ -1,13 +1,11 @@
-﻿using SystemctlService.Tasks.Views;
-using Jobs.Tasks.Common.Logics.DataEditor.Attributes;
+﻿using Jobs.Tasks.Common.Models;
 
-namespace SystemctlService.Tasks
+namespace SystemctlService.Tasks.Views.Status
 {
     /// <summary>
     /// 
     /// </summary>
-    [TaskDataEditor(typeof(SystemctlTaskEditor))]
-    public abstract partial class SystemctlBaseTask
+    public class SystemctlStatusTaskEditorModel : BaseViewModel
     {
         /// <summary>
         /// 

@@ -62,7 +62,6 @@
     <Compile Include="Database\JobsDatabase.cs" />
     <Compile Include="Database\Tables\Job.cs" />
     <Compile Include="Database\Tables\Task.cs" />
-    <Compile Include="Database\Tables\TestTable.cs" />
     <Compile Include="Helpers\ActivatorHelper.cs" />
     <Compile Include="Logics\Container\ServicesContainer.cs" />
     <Compile Include="Logics\Jobs\JobExecuter.cs" />

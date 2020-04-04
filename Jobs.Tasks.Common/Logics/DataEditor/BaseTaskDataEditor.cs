@@ -23,7 +23,7 @@ namespace Jobs.Tasks.Common.Logics.DataEditor
         {
             var jsonData = DataWorker.GetDataJson();
             if (jsonData == null)
-                return default;
+                return default(T);
 
             var jsonDataString = JsonConvert.SerializeObject(jsonData);
             return JsonConvert.DeserializeObject<T>(jsonDataString);

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Common.Logics.Tasks.DataEditor;
 using Jobs.Manager.Logics.Services.Log;
@@ -24,6 +26,11 @@ namespace Jobs.Manager.Views.Tasks
         /// <summary>
         /// 
         /// </summary>
+        public TasksViewModel Model { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public TasksView()
         {
             InitializeComponent();
@@ -37,7 +44,11 @@ namespace Jobs.Manager.Views.Tasks
         {
             RichTextBox.Document.Blocks.Clear();
             JobInfo = jobInfo;
-            DataContext = jobInfo;
+
+            Model = new TasksViewModel();
+            Model.JobInfo = jobInfo;
+            
+            DataContext = Model;
         }
 
         /// <summary>
@@ -72,14 +83,55 @@ namespace Jobs.Manager.Views.Tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ListView_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            ListViewContextMenu.Tag = ((FrameworkElement)e.OriginalSource).DataContext as TaskInfo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var taskInfo = ListViewContextMenu.Tag as TaskInfo;
+            if (taskInfo == null)
+                return;
+
+            var job = new Job();
+            job.Name = JobInfo.Name;
+            job.Description = JobInfo.Description;
+
+            var task = taskInfo.Source.Clone();
+            task.IsChecked = true;
+
+            job.Tasks.Add(task);
+            JobExecute(job);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExecute_Click(object sender, RoutedEventArgs e)
         {
-            var jobExecuter = new JobExecuter(JobInfo.Source);
+            JobExecute(JobInfo.Source);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="job"></param>
+        private void JobExecute(Job job)
+        {
+            var jobExecuter = new JobExecuter(job);
             jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));
             jobExecuter.Container.Register<ITaskCustomizedLogService>(new TaskCustomizedLogService(this));
             jobExecuter.Initialize();
 
-            ExecuteButton.IsEnabled = false;
+            DisableComponents();
             ThreadTask.Run(() => jobExecuter.Execute()).ContinueWith(OnExecuteFinished);
         }
 
@@ -88,7 +140,7 @@ namespace Jobs.Manager.Views.Tasks
         /// </summary>
         private void OnExecuteFinished(Task<bool> result)
         {
-            Dispatcher.Invoke(() => { ExecuteButton.IsEnabled = true; });
+            Dispatcher.Invoke(EnableComponents);
         }
 
         /// <summary>
@@ -145,6 +197,35 @@ namespace Jobs.Manager.Views.Tasks
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
             RichTextBox.Document.Blocks.Clear();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void DisableComponents()
+        {
+            SetComponentsEnable(false);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void EnableComponents()
+        {
+            SetComponentsEnable(true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        private void SetComponentsEnable(bool value)
+        {
+            TasksListBox.IsEnabled = value;
+            AddTaskButton.IsEnabled = value;
+            ClearButton.IsEnabled = value;
+            GoToJobsButton.IsEnabled = value;
+            ExecuteButton.IsEnabled = value;
         }
     }
 }

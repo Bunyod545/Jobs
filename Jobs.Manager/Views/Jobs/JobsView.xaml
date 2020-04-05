@@ -11,8 +11,8 @@
         <CollectionViewSource x:Key="JobsBridge" Source="{Binding Path=Jobs}" />
     </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Label Content="Jobs" FontSize="16" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="30" Background="White" TabIndex="1"></Label>
-        <ScrollViewer Margin="0,35,0,0" VerticalScrollBarVisibility="Auto">
+        <Label Content="Jobs" FontSize="25" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Height="40" Background="White" TabIndex="1"></Label>
+        <ScrollViewer Margin="0,40,0,0" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="JobsControl">
                 <ItemsControl.ItemsSource>
                     <CompositeCollection>

@@ -17,13 +17,13 @@
                 <Label Margin="10,0,0,0" Content="Tasks" VerticalContentAlignment="Center" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Left" Width="233"/>
                 <Button x:Name="AddTaskButton" Content="Add" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" Height="40" Background="Orange" FontWeight="SemiBold" FontSize="15" HorizontalAlignment="Right" Style="{DynamicResource MenusButtonStyle}" Click="AddBtn_Click"/>
             </Grid>
-            <ListView Margin="0,50,0,0" VerticalAlignment="Stretch" x:Name="TasksListBox" ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" ContextMenuOpening="ListView_ContextMenuOpening">
-                <ListView.ContextMenu>
+            <ListBox Margin="0,50,0,0" VerticalAlignment="Stretch" x:Name="TasksListBox" ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" ContextMenuOpening="ListView_ContextMenuOpening">
+                <ListBox.ContextMenu>
                     <ContextMenu x:Name="ListViewContextMenu">
                         <MenuItem Click="MenuItem_OnClick" Header="Execute"/>
                     </ContextMenu>
-                </ListView.ContextMenu>
-                <ListView.ItemTemplate>
+                </ListBox.ContextMenu>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <ListBoxItem>
                             <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -31,15 +31,18 @@
                             </DockPanel>
                         </ListBoxItem>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="Margin" Value="0" />
                         <Setter Property="Padding" Value="0" />
+                        <Setter Property="AllowDrop" Value="true"/>
+                        <EventSetter Event="PreviewMouseMove" Handler="ListBox_PreviewMouseMoveEvent"/>
+                        <EventSetter Event="Drop" Handler="ListBox_Drop"/>
                     </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
         </Grid>
         <Grid Grid.Column="1">
             <DockPanel VerticalAlignment="Top">

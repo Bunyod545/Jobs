@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Common.Logics.Tasks.DataEditor;
+using Jobs.Manager.Helpers;
 using Jobs.Manager.Logics.Services.Log;
 using Jobs.Manager.Views.Jobs.Models;
 using Jobs.Manager.Views.Tasks.Models;
@@ -242,6 +243,9 @@ namespace Jobs.Manager.Views.Tasks
         /// <param name="e"></param>
         private void TaskItemComponent_OnDelete(object sender, TaskInfo e)
         {
+            if (!DeleteHelper.IsAreYouSure())
+                return;
+
             JobInfo.DeleteTask(e);
         }
 

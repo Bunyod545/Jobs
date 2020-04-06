@@ -1,8 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Jobs.Common.Database;
 using Jobs.Common.Database.Tables;
+using Jobs.Manager.Helpers;
 using Jobs.Manager.Views.Jobs.Models;
 using Jobs.Manager.Views.Tasks;
 
@@ -32,7 +34,7 @@ namespace Jobs.Manager.Views.Jobs.JobsViews
             Current = this;
 
             var jobs = JobsDatabase.Jobs.FindAll().ToList();
-            var jobsInfos = jobs.Select(s => new JobInfo(s)).ToList(); 
+            var jobsInfos = jobs.Select(s => new JobInfo(s)).ToList();
 
             ViewModel = new JobsViewModel();
             ViewModel.Jobs = new ObservableCollection<JobInfo>(jobsInfos);
@@ -47,6 +49,9 @@ namespace Jobs.Manager.Views.Jobs.JobsViews
         /// <param name="e"></param>
         private void JobView_OnDelete(object sender, JobInfo e)
         {
+            if (!DeleteHelper.IsAreYouSure())
+                return;
+
             e.Delete();
             ViewModel.Jobs.Remove(e);
         }

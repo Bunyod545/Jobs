@@ -1,0 +1,28 @@
+﻿<dataEditor:BaseTaskDataEditor x:Class="Sftp.Tasks.Views.SftpFolderBackupTaskEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dataEditor="clr-namespace:Jobs.Tasks.Common.Logics.DataEditor;assembly=Jobs.Tasks.Common"
+        mc:Ignorable="d"
+        Title="Publish task data editor" Height="220.609" Width="264.522" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="SftpCopyTaskEditor_OnLoaded">
+    <Grid>
+        <Label Content="Host" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding SftpHost}"  HorizontalAlignment="Left" Height="23" Margin="92,12,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="Login" HorizontalAlignment="Left" Margin="18,36,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding SftpLogin}"  HorizontalAlignment="Left" Height="23" Margin="92,38,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="Password" HorizontalAlignment="Left" Margin="18,64,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="92,66,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="FromPath" HorizontalAlignment="Left" Margin="18,92,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding FromPath}"  HorizontalAlignment="Left" Height="23" Margin="92,94,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="BackupPath" HorizontalAlignment="Left" Margin="18,120,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding BackupPath}"  HorizontalAlignment="Left" Height="23" Margin="92,122,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="81,158,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="162,158,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>
+    </Grid>
+</dataEditor:BaseTaskDataEditor>

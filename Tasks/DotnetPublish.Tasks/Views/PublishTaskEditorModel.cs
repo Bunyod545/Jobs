@@ -15,6 +15,11 @@ namespace DotnetPublish.Tasks.Views
         /// <summary>
         /// 
         /// </summary>
+        public string PublishProfilePath { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Configuration { get; set; }
 
         /// <summary>

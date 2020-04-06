@@ -69,7 +69,10 @@ namespace DotnetPublish.Tasks
         private string GetArguments()
         {
             var argBuilder = new StringBuilder();
-            argBuilder.Append($"/c dotnet publish {ProjectPath}");
+            argBuilder.Append($"/c dotnet publish \"{ProjectPath}\"");
+
+            if (!string.IsNullOrEmpty(PublishProfilePath))
+                argBuilder.Append($" -p:PublishProfile=\"{PublishProfilePath}\"");
 
             if (!string.IsNullOrEmpty(Configuration))
                 argBuilder.Append($" -c {Configuration}");

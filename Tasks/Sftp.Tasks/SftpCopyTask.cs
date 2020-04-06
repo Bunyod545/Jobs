@@ -1,5 +1,4 @@
-﻿using Jobs.Tasks.Common;
-using Renci.SshNet;
+﻿using Renci.SshNet;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -9,7 +8,6 @@ using System.Windows.Media;
 using Jobs.Tasks.Common.Helpers;
 using Jobs.Tasks.Common.Logics.Services.Log;
 using Jobs.Tasks.Common.Logics.Tasks;
-using Sftp.Tasks.Helpers;
 
 namespace Sftp.Tasks
 {

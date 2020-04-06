@@ -20,7 +20,9 @@
             <ListBox Margin="0,50,0,0" VerticalAlignment="Stretch" x:Name="TasksListBox" ItemsSource="{Binding Tasks}" HorizontalContentAlignment="Stretch" ContextMenuOpening="ListView_ContextMenuOpening">
                 <ListBox.ContextMenu>
                     <ContextMenu x:Name="ListViewContextMenu">
-                        <MenuItem Click="MenuItem_OnClick" Header="Execute"/>
+                        <MenuItem Click="ExecuteMenuItem_OnClick" Header="Execute"/>
+                        <MenuItem Click="MoveUpMenuItem_OnClick" Header="Move Up"/>
+                        <MenuItem Click="MoveDownMenuItem_OnClick" Header="Move Down"/>
                     </ContextMenu>
                 </ListBox.ContextMenu>
                 <ListBox.ItemTemplate>
@@ -37,9 +39,6 @@
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         <Setter Property="Margin" Value="0" />
                         <Setter Property="Padding" Value="0" />
-                        <Setter Property="AllowDrop" Value="true"/>
-                        <EventSetter Event="PreviewMouseMove" Handler="ListBox_PreviewMouseMoveEvent"/>
-                        <EventSetter Event="Drop" Handler="ListBox_Drop"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
             </ListBox>

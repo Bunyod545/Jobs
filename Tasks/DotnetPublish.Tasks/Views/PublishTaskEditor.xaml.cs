@@ -51,6 +51,20 @@ namespace DotnetPublish.Tasks.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void PublishProfileBrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Publish profile file | *.pubxml";
+            fileDialog.ShowDialog(this);
+
+            ViewModel.PublishProfilePath = fileDialog.FileName;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             SetTaskData(ViewModel);

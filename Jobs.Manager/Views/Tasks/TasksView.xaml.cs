@@ -94,7 +94,7 @@ namespace Jobs.Manager.Views.Tasks
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void ExecuteMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             var taskInfo = ListViewContextMenu.Tag as TaskInfo;
             if (taskInfo == null)
@@ -109,6 +109,61 @@ namespace Jobs.Manager.Views.Tasks
 
             job.Tasks.Add(task);
             JobExecute(job);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MoveUpMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var taskInfo = ListViewContextMenu.Tag as TaskInfo;
+            if (taskInfo == null)
+                return;
+
+            var index = JobInfo.Tasks.IndexOf(taskInfo);
+            if (index <= 0)
+                return;
+
+            MoveTask(index - 1, taskInfo);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MoveDownMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            var taskInfo = ListViewContextMenu.Tag as TaskInfo;
+            if (taskInfo == null)
+                return;
+
+            var index = JobInfo.Tasks.IndexOf(taskInfo);
+            if (index == -1)
+                return;
+
+            var count = JobInfo.Tasks.Count;
+            if (count == index + 1)
+                return;
+
+            MoveTask(index + 1, taskInfo);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="taskInfo"></param>
+        private void MoveTask(int index, TaskInfo taskInfo)
+        {
+            JobInfo.Source.Tasks.Remove(taskInfo.Source);
+            JobInfo.Source.Tasks.Insert(index, taskInfo.Source);
+
+            JobInfo.Tasks.Remove(taskInfo);
+            JobInfo.Tasks.Insert(index, taskInfo);
+            JobInfo.Update();
         }
 
         /// <summary>
@@ -227,64 +282,6 @@ namespace Jobs.Manager.Views.Tasks
             ClearButton.IsEnabled = value;
             GoToJobsButton.IsEnabled = value;
             ExecuteButton.IsEnabled = value;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListBox_PreviewMouseMoveEvent(object sender, MouseEventArgs e)
-        {
-            if (!(sender is ListBoxItem) || e.LeftButton != MouseButtonState.Pressed)
-                return;
-
-            var draggedItem = (ListBoxItem)sender;
-            DragDrop.DoDragDrop(draggedItem, draggedItem.DataContext, DragDropEffects.Move);
-            draggedItem.IsSelected = true;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ListBox_Drop(object sender, DragEventArgs e)
-        {
-            if (!(sender is ListBoxItem))
-                return;
-
-            var droppedData = e.Data.GetData(typeof(TaskInfo)) as TaskInfo;
-            var target = ((ListBoxItem)sender).DataContext as TaskInfo;
-
-            if (droppedData == null || target == null)
-                return;
-
-            var removedIdx = TasksListBox.Items.IndexOf(droppedData);
-            var targetIdx = TasksListBox.Items.IndexOf(target);
-
-            if (removedIdx < targetIdx)
-            {
-                DropTask(targetIdx + 1, droppedData, removedIdx);
-                return;
-            }
-
-            var remIdx = removedIdx + 1;
-            if (JobInfo.Tasks.Count + 1 > remIdx)
-                DropTask(targetIdx, droppedData, removedIdx + 1);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void DropTask(int targetIndex, TaskInfo droppedData, int removedIndex)
-        {
-            JobInfo.Source.Tasks.Insert(targetIndex, droppedData.Source);
-            JobInfo.Source.Tasks.RemoveAt(removedIndex);
-
-            JobInfo.Tasks.Insert(targetIndex, droppedData);
-            JobInfo.Tasks.RemoveAt(removedIndex);
-            JobInfo.Update();
         }
     }
 }

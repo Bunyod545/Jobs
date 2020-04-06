@@ -6,30 +6,34 @@
         xmlns:dataEditor="clr-namespace:Jobs.Tasks.Common.Logics.DataEditor;assembly=Jobs.Tasks.Common"
         xmlns:helpers="clr-namespace:DotnetPublish.Tasks.Helpers"
         mc:Ignorable="d"
-        Title="Publish task data editor" Height="209.688" Width="256.25" WindowStartupLocation="CenterScreen" Loaded="PublishTaskEditor_OnLoaded" ResizeMode="NoResize">
+        Title="Publish task data editor" Height="201.825" Width="252.755" WindowStartupLocation="CenterScreen" Loaded="PublishTaskEditor_OnLoaded" ResizeMode="NoResize">
     <Grid>
         <Label Content="Project" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding ProjectPath}"  HorizontalAlignment="Left" Height="23" Margin="106,13,0,0" VerticalAlignment="Top" Width="95" TextWrapping="NoWrap"/>
         <Button Content="..." HorizontalAlignment="Left" Height="21" Margin="206,14,0,0" VerticalAlignment="Top" Width="20" Click="ProjectBrowseButton_Click"/>
 
-        <Label Content="Configuration" HorizontalAlignment="Left" Margin="18,41,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="106,45,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Configuration}">
+        <Label Content="Publish Profile" HorizontalAlignment="Left" Margin="18,36,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding PublishProfilePath}"  HorizontalAlignment="Left" Height="23" Margin="106,39,0,0" VerticalAlignment="Top" Width="95" TextWrapping="NoWrap"/>
+        <Button Content="..." HorizontalAlignment="Left" Height="21" Margin="206,40,0,0" VerticalAlignment="Top" Width="20" Click="PublishProfileBrowseButton_Click"/>
+
+        <Label Content="Configuration" HorizontalAlignment="Left" Margin="18,63,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="106,67,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Configuration}">
             <ComboBoxItem Content="Debug"/>
             <ComboBoxItem Content="Release"/>
         </ComboBox>
 
-        <Label Content="Framework" HorizontalAlignment="Left" Margin="18,72,0,0" VerticalAlignment="Top"/>
-        <ComboBox ItemsSource="{Binding Source={x:Static helpers:FrameworkHelpers.Frameworks}}" HorizontalAlignment="Left" Margin="106,76,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Framework}"/>
+        <Label Content="Framework" HorizontalAlignment="Left" Margin="18,89,0,0" VerticalAlignment="Top"/>
+        <ComboBox ItemsSource="{Binding Source={x:Static helpers:FrameworkHelpers.Frameworks}}" HorizontalAlignment="Left" Margin="106,93,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Framework}"/>
 
-        <Label Content="Runtime" HorizontalAlignment="Left" Margin="18,103,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="106,107,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Runtime}">
+        <Label Content="Runtime" HorizontalAlignment="Left" Margin="18,115,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="106,119,0,0" VerticalAlignment="Top" Width="120" IsEditable="True" SelectedValuePath="Content" Text="{Binding Runtime}">
             <ComboBoxItem Content="linux-x64"/>
             <ComboBoxItem Content="win-x64"/>
             <ComboBoxItem Content="win-x86"/>
         </ComboBox>
 
-        <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="68,142,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
-        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,142,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>
-     
+        <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="68,147,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,147,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>
+
     </Grid>
 </dataEditor:BaseTaskDataEditor>

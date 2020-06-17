@@ -173,6 +173,11 @@
       <Name>DotnetPublish.Tasks</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Tasks\InfokioskGateWay.Tasks\InfokioskGateWay.Tasks.csproj">
+      <Project>{481f3fe6-a643-4eef-8d3d-81da719a881e}</Project>
+      <Name>InfokioskGateWay.Tasks</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Tasks\Sftp.Tasks\Sftp.Tasks.csproj">
       <Project>{844b7220-aad3-413a-88a8-239889c99837}</Project>
       <Name>Sftp.Tasks</Name>

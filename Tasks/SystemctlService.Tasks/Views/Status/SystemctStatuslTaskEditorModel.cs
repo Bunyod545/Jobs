@@ -1,11 +1,11 @@
 ﻿using Jobs.Tasks.Common.Models;
 
-namespace SystemctlService.Tasks.Views.Status
+namespace SystemctlService.Tasks.Views
 {
     /// <summary>
     /// 
     /// </summary>
-    public class SystemctlStatusTaskEditorModel : BaseViewModel
+    public class SystemctStatuslTaskEditorModel : BaseViewModel
     {
         /// <summary>
         /// 

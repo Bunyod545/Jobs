@@ -36,7 +36,7 @@ namespace Sftp.Tasks.Tasks.SftpFolderBackupTasks
         /// <returns></returns>
         public bool Execute()
         {
-            var decryptedPassword = PasswordHelper.Decrypt(SftpPassword);
+            var decryptedPassword = EncrytionHelper.Decrypt(SftpPassword);
             var client = new SshClient(SftpHost, SftpLogin, decryptedPassword);
             client.Connect();
             var termkvp = new Dictionary<TerminalModes, uint>();
@@ -54,12 +54,10 @@ namespace Sftp.Tasks.Tasks.SftpFolderBackupTasks
 
             WriteStream($"cp -r {FromPath}/* {backupfolder}", shellStream);
             result = ReadStream(shellStream);
+           
             _log.Information(result);
-
             _log.Success("Execute FolderBackupTask finished!");
-            _log.Information(string.Empty);
-            _log.Information(string.Empty);
-
+            
             client.Disconnect();
             return true;
         }

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sftp.Tasks", "Tasks\Sftp.Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Tasks", "Tasks\Test.Tasks\Test.Tasks.csproj", "{7813C9DA-802C-4030-9E63-15A64ED45258}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfokioskGateWay.Tasks", "Tasks\InfokioskGateWay.Tasks\InfokioskGateWay.Tasks.csproj", "{481F3FE6-A643-4EEF-8D3D-81DA719A881E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{7813C9DA-802C-4030-9E63-15A64ED45258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7813C9DA-802C-4030-9E63-15A64ED45258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7813C9DA-802C-4030-9E63-15A64ED45258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{481F3FE6-A643-4EEF-8D3D-81DA719A881E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{481F3FE6-A643-4EEF-8D3D-81DA719A881E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{481F3FE6-A643-4EEF-8D3D-81DA719A881E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{481F3FE6-A643-4EEF-8D3D-81DA719A881E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{0CDA19A4-1687-4DC0-8076-FDC67786F14B} = {D3A1D077-1921-4A1A-8AE6-ED3E01A2ACFD}
 		{844B7220-AAD3-413A-88A8-239889C99837} = {D3A1D077-1921-4A1A-8AE6-ED3E01A2ACFD}
 		{7813C9DA-802C-4030-9E63-15A64ED45258} = {D3A1D077-1921-4A1A-8AE6-ED3E01A2ACFD}
+		{481F3FE6-A643-4EEF-8D3D-81DA719A881E} = {D3A1D077-1921-4A1A-8AE6-ED3E01A2ACFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BCED1459-6BE8-4B26-9017-AE5236DC9599}

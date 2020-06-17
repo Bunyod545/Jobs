@@ -8,6 +8,7 @@ using Jobs.Common.Logics.Tasks.Logics.Container;
 using Jobs.Common.Logics.Tasks.Logics.Initializer;
 using Jobs.Tasks.Common.Logics.Arguments;
 using Jobs.Tasks.Common.Logics.Services.Container;
+using Jobs.Tasks.Common.Logics.Services.Log;
 using Jobs.Tasks.Common.Logics.Tasks;
 
 namespace Jobs.Common.Logics.Tasks.Executer

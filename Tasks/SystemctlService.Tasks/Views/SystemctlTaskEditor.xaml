@@ -8,16 +8,16 @@
         Title="Systemctl service data" Height="185.679" Width="256.25" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="SftpCopyTaskEditor_OnLoaded">
     <Grid>
         <Label Content="Host" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding SshHost}"  HorizontalAlignment="Left" Height="23" Margin="79,13,0,0" VerticalAlignment="Top" Width="147"/>
+        <ComboBox Name="HostsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,13,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="Login" HorizontalAlignment="Left" Margin="18,36,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding SshLogin}"  HorizontalAlignment="Left" Height="23" Margin="79,39,0,0" VerticalAlignment="Top" Width="147"/>
+        <ComboBox Name="LoginsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,39,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="Password" HorizontalAlignment="Left" Margin="18,64,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="79,67,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="Service" HorizontalAlignment="Left" Margin="18,95,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding ServiceName}"  HorizontalAlignment="Left" Height="23" Margin="79,98,0,0" VerticalAlignment="Top" Width="147"/>
+        <TextBox x:Name="ServiceTextBox" HorizontalAlignment="Left" Height="23" Margin="79,98,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="67,131,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
         <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,131,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>

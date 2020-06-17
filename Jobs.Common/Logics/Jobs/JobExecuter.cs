@@ -1,11 +1,16 @@
 ﻿using Jobs.Common.Database.Tables;
-using Jobs.Common.Logics.Tasks;
 using System.Linq;
 using Jobs.Common.Logics.Container;
 using Jobs.Common.Logics.Tasks.Executer;
 
 namespace Jobs.Common.Logics.Jobs
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="taskExecuter"></param>
+    public delegate void TaskExecutedHandler(TaskExecuter taskExecuter);
+
     /// <summary>
     /// 
     /// </summary>
@@ -25,6 +30,11 @@ namespace Jobs.Common.Logics.Jobs
         /// 
         /// </summary>
         public ServicesContainer Container { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public event TaskExecutedHandler TaskExecuted;
 
         /// <summary>
         /// 
@@ -59,7 +69,20 @@ namespace Jobs.Common.Logics.Jobs
             taskExecuters.ForEach(f => f.Initialize());
             Container.Initialize();
 
-            return taskExecuters.All(a => a.Execute());
+            return taskExecuters.All(InternalExecuteTask);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="taskExecuter"></param>
+        /// <returns></returns>
+        private bool InternalExecuteTask(TaskExecuter taskExecuter)
+        {
+            var result = taskExecuter.Execute();
+            TaskExecuted?.Invoke(taskExecuter);
+
+            return result;
         }
     }
 }

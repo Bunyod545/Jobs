@@ -58,7 +58,7 @@ namespace Sftp.Tasks
         /// <returns></returns>
         public bool Execute()
         {
-            var decryptedPassword = PasswordHelper.Decrypt(SftpPassword);
+            var decryptedPassword = EncrytionHelper.Decrypt(SftpPassword);
             var sftpClient = new SftpClient(SftpHost, SftpLogin, decryptedPassword);
 
             sftpClient.Connect();
@@ -72,8 +72,6 @@ namespace Sftp.Tasks
             sftpClient.Dispose();
 
             _log.Success("Files copy success");
-            _log.Information(string.Empty);
-            _log.Information(string.Empty);
             return true;
         }
 

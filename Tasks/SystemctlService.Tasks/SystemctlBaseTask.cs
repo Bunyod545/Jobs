@@ -35,7 +35,7 @@ namespace SystemctlService.Tasks
         /// <returns></returns>
         public virtual bool Execute()
         {
-            var decryptedPassword = PasswordHelper.Decrypt(SshPassword);
+            var decryptedPassword = EncrytionHelper.Decrypt(SshPassword);
             var client = new SshClient(SshHost, SshLogin, decryptedPassword);
             client.Connect();
 
@@ -53,9 +53,6 @@ namespace SystemctlService.Tasks
                 WaitStatusChange(shellStream);
 
             _log.Success("Execute systemctl finished!");
-            _log.Information(string.Empty);
-            _log.Information(string.Empty);
-
             client.Disconnect();
             return true;
         }

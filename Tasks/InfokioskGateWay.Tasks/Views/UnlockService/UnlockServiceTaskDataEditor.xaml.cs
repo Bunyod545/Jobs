@@ -1,22 +1,21 @@
 ﻿using System.Windows;
-using Jobs.Tasks.Common.Helpers;
 
-namespace Sftp.Tasks.Views
+namespace InfokioskGateWay.Tasks.Views.UnlockService
 {
     /// <summary>
-    ///
+    /// 
     /// </summary>
-    public partial class SftpFolderBackupTaskEditor
+    public partial class UnlockServiceTaskDataEditor
     {
         /// <summary>
         /// 
         /// </summary>
-        public SftpFolderBackupTaskEditorModel ViewModel { get; private set; }
+        public UnlockServiceTaskDataEditorModel Model { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public SftpFolderBackupTaskEditor()
+        public UnlockServiceTaskDataEditor()
         {
             InitializeComponent();
         }
@@ -26,11 +25,10 @@ namespace Sftp.Tasks.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SftpCopyTaskEditor_OnLoaded(object sender, RoutedEventArgs e)
+        private void TaskDataEditor_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = GetTaskData<SftpFolderBackupTaskEditorModel>() ?? new SftpFolderBackupTaskEditorModel();
-            DataContext = ViewModel;
-            PasswordBox.Password = EncrytionHelper.Decrypt(ViewModel.SftpPassword);
+            Model = GetTaskData<UnlockServiceTaskDataEditorModel>() ?? new UnlockServiceTaskDataEditorModel();
+            DataContext = Model;
         }
 
         /// <summary>
@@ -40,10 +38,7 @@ namespace Sftp.Tasks.Views
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(PasswordBox.Password))
-                ViewModel.SftpPassword = EncrytionHelper.Encrypt(PasswordBox.Password);
-
-            SetTaskData(ViewModel);
+            SetTaskData(Model);
             Close();
         }
 

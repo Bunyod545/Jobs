@@ -103,8 +103,6 @@ namespace DotnetPublish.Tasks
         {
             _log.Information(string.Empty);
             _log.Success("Publish success");
-            _log.Information(string.Empty);
-            _log.Information(string.Empty);
         }
 
         /// <summary>
@@ -114,8 +112,6 @@ namespace DotnetPublish.Tasks
         {
             _log.Information(string.Empty);
             _log.Error("Publish failed");
-            _log.Information(string.Empty);
-            _log.Information(string.Empty);
         }
     }
 }

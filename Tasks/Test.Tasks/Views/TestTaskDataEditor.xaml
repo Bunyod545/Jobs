@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:dataEditor="clr-namespace:Jobs.Tasks.Common.Logics.DataEditor;assembly=Jobs.Tasks.Common"
         mc:Ignorable="d"
-        Title="TestTaskDataEditor" Height="105" Width="204.687" Loaded="TestTaskDataEditor_OnLoaded">
+        Title="TestTaskDataEditor" Height="105" Width="204.687" Loaded="TestTaskDataEditor_OnLoaded" WindowStartupLocation="CenterScreen">
     <Grid>
         <Label Content="Name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="53,13,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="131"/>

@@ -8,20 +8,20 @@
         Title="Publish task data editor" Height="220.609" Width="256.25" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="SftpCopyTaskEditor_OnLoaded">
     <Grid>
         <Label Content="Host" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding SftpHost}"  HorizontalAlignment="Left" Height="23" Margin="79,13,0,0" VerticalAlignment="Top" Width="147"/>
+        <ComboBox Name="HostsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,13,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="Login" HorizontalAlignment="Left" Margin="18,36,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding SftpLogin}"  HorizontalAlignment="Left" Height="23" Margin="79,39,0,0" VerticalAlignment="Top" Width="147"/>
+        <ComboBox Name="LoginsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,39,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="Password" HorizontalAlignment="Left" Margin="18,64,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="79,67,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Label Content="FromPath" HorizontalAlignment="Left" Margin="18,92,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding FromPath}"  HorizontalAlignment="Left" Height="23" Margin="79,95,0,0" VerticalAlignment="Top" Width="121"/>
+        <TextBox x:Name="FromPathTextBox" HorizontalAlignment="Left" Height="23" Margin="79,95,0,0" VerticalAlignment="Top" Width="121"/>
         <Button Content="..." HorizontalAlignment="Left" Height="21" Margin="206,96,0,0" VerticalAlignment="Top" Width="20" Click="FromBaseButton_Click"/>
 
         <Label Content="ToPath" HorizontalAlignment="Left" Margin="18,120,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding ToPath}"  HorizontalAlignment="Left" Height="23" Margin="79,123,0,0" VerticalAlignment="Top" Width="147"/>
+        <TextBox x:Name="ToPathTextBox" HorizontalAlignment="Left" Height="23" Margin="79,123,0,0" VerticalAlignment="Top" Width="147"/>
 
         <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="68,159,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
         <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,159,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>

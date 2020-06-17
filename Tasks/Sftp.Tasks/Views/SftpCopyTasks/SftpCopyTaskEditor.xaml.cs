@@ -1,6 +1,10 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
+using SystemctlService.Tasks.Logics.HostData;
 using Jobs.Tasks.Common.Helpers;
+using Sftp.Tasks.Logics.HostData.Models;
 
 namespace Sftp.Tasks.Views
 {
@@ -30,8 +34,47 @@ namespace Sftp.Tasks.Views
         private void SftpCopyTaskEditor_OnLoaded(object sender, RoutedEventArgs e)
         {
             ViewModel = GetTaskData<SftpCopyTaskEditorModel>() ?? new SftpCopyTaskEditorModel();
-            DataContext = ViewModel;
-            PasswordBox.Password = PasswordHelper.Decrypt(ViewModel.SftpPassword);
+
+            HostsCombobox.Text = ViewModel.SftpHost;
+            LoginsCombobox.Text = ViewModel.SftpLogin;
+            PasswordBox.Password = EncrytionHelper.Decrypt(ViewModel.SftpPassword);
+            FromPathTextBox.Text = ViewModel.FromPath;
+            ToPathTextBox.Text = ViewModel.ToPath;
+
+            var hosts = HostDataManager.GetHostsInfos().Select(s => s.Host).ToList();
+            hosts.ForEach(f => HostsCombobox.Items.Add(f));
+
+            HostsCombobox.SelectionChanged += Hosts_OnSelectionChanged;
+            LoginsCombobox.SelectionChanged += Logins_OnSelectionChanged;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Hosts_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var hostInfos = HostDataManager.GetHostInfo(HostsCombobox.SelectedItem?.ToString());
+            var logins = hostInfos.LoginInfos.Select(s => s.Login).ToList();
+
+            LoginsCombobox.Items.Clear();
+            logins.ForEach(f => LoginsCombobox.Items.Add(f));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Logins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var host = HostsCombobox.SelectedItem?.ToString();
+            var login = LoginsCombobox.SelectedItem?.ToString();
+
+            var hostInfo = HostDataManager.GetHostLoginInfo(host, login);
+            if (hostInfo != null)
+                PasswordBox.Password = hostInfo.Password;
         }
 
         /// <summary>
@@ -44,7 +87,7 @@ namespace Sftp.Tasks.Views
             var folderBrowserDialog = new FolderBrowserDialog();
             folderBrowserDialog.ShowDialog();
 
-            ViewModel.FromPath = folderBrowserDialog.SelectedPath;
+            FromPathTextBox.Text = folderBrowserDialog.SelectedPath;
         }
 
         /// <summary>
@@ -54,8 +97,19 @@ namespace Sftp.Tasks.Views
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            var hostInfo = new HostSubmitInfo();
+            hostInfo.Host = HostsCombobox.Text;
+            hostInfo.Login = LoginsCombobox.Text;
+            hostInfo.Password = PasswordBox.Password;
+            HostDataManager.SubmitHostInfo(hostInfo);
+
+            ViewModel.SftpHost = HostsCombobox.Text;
+            ViewModel.SftpLogin = LoginsCombobox.Text;
+            ViewModel.FromPath = FromPathTextBox.Text;
+            ViewModel.ToPath = ToPathTextBox.Text;
+
             if (!string.IsNullOrEmpty(PasswordBox.Password))
-                ViewModel.SftpPassword = PasswordHelper.Encrypt(PasswordBox.Password);
+                ViewModel.SftpPassword = EncrytionHelper.Encrypt(PasswordBox.Password);
 
             SetTaskData(ViewModel);
             Close();

@@ -8,7 +8,7 @@ namespace Jobs.Tasks.Common.Helpers
     /// <summary>
     /// 
     /// </summary>
-    public class PasswordHelper
+    public class EncrytionHelper
     {
         /// <summary>
         /// 

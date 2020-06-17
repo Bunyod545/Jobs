@@ -1,4 +1,4 @@
-﻿using SystemctlService.Tasks.Views.Status;
+﻿using SystemctlService.Tasks.Views;
 using Jobs.Tasks.Common.Logics.DataEditor.Attributes;
 using Jobs.Tasks.Common.Logics.Services.Log;
 

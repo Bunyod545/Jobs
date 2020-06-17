@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Jobs.Common.Database.Tables;
 using Jobs.Common.Logics.Jobs;
 using Jobs.Common.Logics.Tasks.DataEditor;
@@ -49,7 +49,6 @@ namespace Jobs.Manager.Views.Tasks
 
             Model = new TasksViewModel();
             Model.JobInfo = jobInfo;
-
             DataContext = Model;
         }
 
@@ -183,10 +182,13 @@ namespace Jobs.Manager.Views.Tasks
         /// <param name="job"></param>
         private void JobExecute(Job job)
         {
+            var logService = new TaskLogService(this);
+
             var jobExecuter = new JobExecuter(job);
-            jobExecuter.Container.Register<ITaskLogService>(new TaskLogService(this));
+            jobExecuter.Container.Register<ITaskLogService>(logService);
             jobExecuter.Container.Register<ITaskCustomizedLogService>(new TaskCustomizedLogService(this));
             jobExecuter.Initialize();
+            jobExecuter.TaskExecuted += executer => logService.Information(Environment.NewLine);
 
             DisableComponents();
             ThreadTask.Run(() => jobExecuter.Execute()).ContinueWith(OnExecuteFinished);

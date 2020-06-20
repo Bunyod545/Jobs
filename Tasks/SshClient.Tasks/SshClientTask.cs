@@ -8,12 +8,12 @@ using Jobs.Tasks.Common.Logics.Tasks;
 using Renci.SshNet;
 using Renci.SshNet.Common;
 
-namespace SystemctlService.Tasks
+namespace SshClient.Tasks
 {
     /// <summary>
     /// 
     /// </summary>
-    public abstract partial class SystemctlBaseTask : ITask
+    public partial class SshClientTask : ITask
     {
         /// <summary>
         /// 
@@ -24,7 +24,7 @@ namespace SystemctlService.Tasks
         /// 
         /// </summary>
         /// <param name="log"></param>
-        protected SystemctlBaseTask(ITaskLogService log)
+        public SshClientTask(ITaskLogService log)
         {
             _log = log;
         }
@@ -36,62 +36,24 @@ namespace SystemctlService.Tasks
         public virtual bool Execute()
         {
             var decryptedPassword = EncrytionHelper.Decrypt(SshPassword);
-            var client = new SshClient(SshHost, SshLogin, decryptedPassword);
+            var client = new Renci.SshNet.SshClient(SshHost, SshLogin, decryptedPassword);
             client.Connect();
 
             var termkvp = new Dictionary<TerminalModes, uint>();
             termkvp.Add(TerminalModes.ECHO, 53);
 
             var shellStream = client.CreateShellStream("xterm", 80, 24, 800, 600, 1024, termkvp);
-            SwitchToRoot(decryptedPassword, shellStream);
-            WriteStream($"systemctl {GetCommandName()} {ServiceName} -l", shellStream);
+            if (IsRoot)
+                SwitchToRoot(decryptedPassword, shellStream);
 
+            WriteStream(Command, shellStream);
             var result = ReadStream(shellStream);
             _log.Information(result);
 
-            if(IsWaitStatusChange())
-                WaitStatusChange(shellStream);
-
-            _log.Success("Execute systemctl finished!");
+            _log.Success("Command Execute finished!");
             client.Disconnect();
             return true;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        protected virtual bool IsWaitStatusChange()
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shellStream"></param>
-        protected virtual void WaitStatusChange(ShellStream shellStream)
-        {
-            _log.Information("Waiting status!");
-            string newText;
-
-            while (true)
-            {
-                Thread.Sleep(1000);
-
-                WriteStream($"systemctl status {ServiceName} -l", shellStream);
-                newText = ReadStream(shellStream);
-
-                if(newText.Contains("Press Ctrl+C to shut down"))
-                    break;
-
-                if (newText.Contains("entered failed state"))
-                    break;
-            }
-
-            _log.Information(newText);
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -141,11 +103,5 @@ namespace SystemctlService.Tasks
             prompt = stream.Expect(new Regex(@"[$#>]"));
             _log.Information(prompt);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public abstract string GetCommandName();
     }
 }

@@ -168,6 +168,11 @@
       <Project>{89026aba-3521-4b01-b243-46bce5904d28}</Project>
       <Name>Jobs.Tasks.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tasks\Cmd.Tasks\Cmd.Tasks.csproj">
+      <Project>{1ad517f9-9e8d-40b5-bae8-1587cfd3838c}</Project>
+      <Name>Cmd.Tasks</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Tasks\DotnetPublish.Tasks\DotnetPublish.Tasks.csproj">
       <Project>{84564a85-f8a4-46f1-8f32-c955b1ec8d7c}</Project>
       <Name>DotnetPublish.Tasks</Name>
@@ -181,6 +186,11 @@
     <ProjectReference Include="..\Tasks\Sftp.Tasks\Sftp.Tasks.csproj">
       <Project>{844b7220-aad3-413a-88a8-239889c99837}</Project>
       <Name>Sftp.Tasks</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tasks\SshClient.Tasks\SshClient.Tasks.csproj">
+      <Project>{8a2b19a6-d168-4385-8b5b-b21db2e3f772}</Project>
+      <Name>SshClient.Tasks</Name>
       <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tasks\SystemctlService.Tasks\SystemctlService.Tasks.csproj">

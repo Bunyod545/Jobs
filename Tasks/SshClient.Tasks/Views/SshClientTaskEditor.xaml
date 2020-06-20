@@ -1,0 +1,26 @@
+﻿<dataEditor:BaseTaskDataEditor x:Class="SshClient.Tasks.Views.SshClientTaskEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dataEditor="clr-namespace:Jobs.Tasks.Common.Logics.DataEditor;assembly=Jobs.Tasks.Common"
+        mc:Ignorable="d"
+        Title="Systemctl service data" Height="206.992" Width="256.25" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="SftpCopyTaskEditor_OnLoaded">
+    <Grid>
+        <Label Content="Host" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="HostsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,13,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="Login" HorizontalAlignment="Left" Margin="18,36,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="LoginsCombobox" IsEditable="True" HorizontalAlignment="Left" Height="23" Margin="79,39,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="Password" HorizontalAlignment="Left" Margin="18,64,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="79,67,0,0" VerticalAlignment="Top" Width="147"/>
+
+        <Label Content="Cmd" HorizontalAlignment="Left" Margin="18,95,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CmdTextBox" HorizontalAlignment="Left" Height="23" Margin="79,98,0,0" VerticalAlignment="Top" Width="147"/>
+        <CheckBox Content="Is Root" x:Name="IsRootCheckBox" HorizontalAlignment="Left" Margin="78,128,0,0" VerticalAlignment="Top"/>
+
+        <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="67,151,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
+        <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,151,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>
+    </Grid>
+</dataEditor:BaseTaskDataEditor>

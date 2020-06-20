@@ -34,6 +34,5 @@
 
         <Button Content="Save" HorizontalAlignment="Left" Height="21" Margin="68,147,0,0" VerticalAlignment="Top" Width="77" Click="SaveButton_Click" />
         <Button Content="Cancel" HorizontalAlignment="Left" Height="21" Margin="149,147,0,0" VerticalAlignment="Top" Width="77" Click="CancelButton_Click"/>
-
     </Grid>
 </dataEditor:BaseTaskDataEditor>
